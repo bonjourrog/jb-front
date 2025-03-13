@@ -1,0 +1,24 @@
+.header{
+    @apply flex items-center justify-between fixed left-1/2 top-3 bg-[#202020] w-4/5 transform -translate-x-1/2 rounded-full py-2 px-2 pl-10 h-16 text-white;
+}
+.header>span{
+    @apply flex font-bold text-lg;
+}
+.header p{
+    @apply text-blue-400;
+}
+.header>div{
+    @apply flex items-center gap-2 h-full;
+}
+.register-btn{
+    @apply flex items-center bg-[#777CE4] h-full px-6 rounded-full;
+}
+.menu{
+    @apply flex gap-4;
+}
+.menu>li{
+    @apply cursor-pointer;
+}
+.active{
+    @apply text-rose-50;
+}
