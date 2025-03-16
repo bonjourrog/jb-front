@@ -1,0 +1,27 @@
+.hero{
+    @apply flex h-screen bg-white pt-36;
+}
+.hero__ls{
+    @apply flex flex-col gap-5 w-2/5 px-20;
+}
+.hero__headline{
+    @apply font-bold text-5xl;
+}
+.hero__subheadline{
+    @apply text-zinc-600;
+}
+.hero__search{
+    @apply flex gap-2;
+}
+.hero__search-box{
+    @apply border-2 border-[#B3B1FE] w-48 h-12 rounded-lg shadow-md;
+}
+.hero__search-btn{
+    @apply flex items-center justify-center h-12 w-12 bg-[#B3B1FE] text-white rounded-lg shadow-md;
+}
+.hero__rs{
+    @apply w-3/5;
+}
+.hero__rs > img{
+    @apply w-[35em] mx-auto;
+}
