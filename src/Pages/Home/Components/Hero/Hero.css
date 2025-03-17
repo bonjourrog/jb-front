@@ -25,3 +25,50 @@
 .hero__rs > img{
     @apply w-[35em] mx-auto;
 }
+@media screen and (max-width:1100px) {
+    .hero__rs{
+        @apply w-1/2;
+    }
+    .hero__ls{
+        @apply w-1/2;
+    }
+}
+@media screen and (max-width:950px) {
+    .hero__headline{
+        @apply text-4xl;
+    }
+}
+@media screen and (max-width:850px) {
+    .hero{
+        @apply flex flex-col-reverse items-center justify-center gap-10 pt-0; 
+    }
+    .hero__rs {
+        @apply w-full;
+    }
+    .hero__rs > img{
+        @apply w-72;
+    }
+    .hero__ls{
+        @apply  flex justify-center items-center w-full;
+    }
+    .hero__headline{
+        @apply text-3xl text-center;
+    }
+    .hero__subheadline{
+        @apply text-center;
+    }
+    .hero__search{
+        @apply w-80 mt-5;
+    }
+    .hero__search-box{
+        @apply w-full h-16;
+    }
+    .hero__search-btn{
+        @apply h-16 w-20;
+    }
+}
+@media screen and (max-width:400px) {
+    .hero__rs > img{
+        @apply w-full;
+    }
+}
