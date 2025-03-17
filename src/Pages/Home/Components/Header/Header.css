@@ -1,13 +1,13 @@
 .header{
-    @apply flex items-center justify-between fixed left-1/2 top-3 bg-[#202020] w-4/5 transform -translate-x-1/2 rounded-full py-2 px-2 pl-10 h-16 text-white;
+    @apply flex items-center justify-between fixed top-3 bg-[#202020] w-4/5 transform -translate-x-1/2 rounded-full py-2 px-2 pl-10 h-16 text-white transition-all duration-150 ease-in-out;
 }
-.header>span{
+.logo{
     @apply flex font-bold text-lg;
 }
 .header p{
     @apply text-blue-400;
 }
-.header>div{
+.header__actions{
     @apply flex items-center gap-2 h-full;
 }
 .register-btn{
@@ -21,4 +21,27 @@
 }
 .active{
     @apply text-rose-50;
+}
+.menu__btn{
+    @apply absolute top-10 -left-10 text-3xl text-[#202020];
+}
+.menu__btn--close{
+    @apply left-auto right-6 text-white;
+}
+@media screen and (max-width:800px) {
+    .header{
+        @apply flex-col justify-center gap-10 w-screen h-screen rounded-none p-0 top-0;
+    }
+    .menu{
+        @apply flex-col gap-10 items-center;
+    }
+    .header__actions{
+        @apply flex flex-col gap-10 pt-6 border-t-2 border-zinc-600 h-auto;
+    }
+    .register-btn{
+        @apply h-auto py-2;
+    }
+    .logo{
+        @apply absolute top-10 left-1/2 transform -translate-x-1/2;
+    }
 }
