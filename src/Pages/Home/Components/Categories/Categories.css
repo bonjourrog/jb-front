@@ -27,10 +27,13 @@
         @apply h-screen;
     }
     .categories__content{
-        @apply w-10/12  border-4 border-red-500;
+        @apply w-10/12;
     }
 }
 @media screen and (max-width:1300px){
+    .categories{
+        @apply  h-auto;
+    }
     .categories>img{
         @apply w-full h-full;
     }
@@ -49,5 +52,15 @@
 @media screen and (max-width:1000px){
     .categories__list{
         @apply grid-cols-3;
+    }
+}
+@media screen and (max-width:800px){
+    .categories__list{
+        @apply grid-cols-2;
+    }
+}
+@media screen and (max-width:500px){
+    .categories__list{
+        @apply grid-cols-1 px-10;
     }
 }
