@@ -24,7 +24,7 @@
 }
 @media screen and (max-width:1400px) {
     .categories{
-        @apply h-screen;
+        @apply h-auto;
     }
     .categories__content{
         @apply w-10/12;
