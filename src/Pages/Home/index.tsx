@@ -5,6 +5,7 @@ import Hero from "./Components/Hero";
 import Categories from "./Components/Categories";
 import Signup from "./Components/Signup";
 import Post from "./Components/Post";
+import HIW from "./Components/HIW";
 
 const Home:React.FC<HomeProps> = ()=>{
     return <div>
@@ -16,6 +17,7 @@ const Home:React.FC<HomeProps> = ()=>{
         <Categories/>
         <Signup/>
         <Post/>
+        <HIW/>
     </div>
 }
 export default Home;

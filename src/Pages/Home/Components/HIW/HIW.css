@@ -1,0 +1,43 @@
+.hiw{
+    @apply flex flex-col px-20 py-20 gap-20;
+}
+.hiw__header{
+    @apply flex flex-col gap-6 w-full mb-20 text-center;
+}
+.hiw__header > h2{
+    @apply font-bold text-4xl;
+}
+.step{
+    @apply flex items-center justify-between gap-10 w-[55em] h-auto mx-auto;
+}
+.step__desc{
+    @apply gap-4;
+}
+.step__desc>strong{
+    @apply text-2xl;
+}
+.step__desc>p{
+    @apply mt-4 ml-12 w-96 leading-loose text-zinc-700;
+}
+.step__img{
+    @apply w-72;
+}
+@media screen and (max-width:1050px) {
+    .step{
+        @apply w-full;
+    }
+}
+@media screen and (max-width:800px){
+    .hiw{
+        @apply px-10;
+    }
+    .step{
+        @apply flex-col justify-center text-center;
+    }
+    .step:nth-child(odd){
+        @apply flex-col-reverse;
+    }
+    .step__desc>p{
+        @apply mx-0;
+    }
+} 
