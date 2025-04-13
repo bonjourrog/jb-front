@@ -1,0 +1,41 @@
+.signup{
+    max-width: 100vw;
+    width: 100vw;
+    @apply relative flex items-center justify-between gap-5 h-screen px-28;
+}
+.signup__rs{
+    @apply w-3/5;
+}
+.signup__ls{
+    @apply flex flex-col items-start gap-10 w-auto;
+}
+.signup__headline{
+    @apply text-5xl font-extrabold leading-snug;
+}
+.signup__btn{
+    @apply bg-[#777CE4] text-white px-4 py-2 rounded-full cursor-pointer;
+}
+@media screen and (max-width:1050px) {
+    .signup{
+        @apply px-20;
+    }
+}
+@media screen and (max-width:900px) {
+    .signup{
+        @apply justify-center h-auto py-20;
+    }
+    .signup__rs{
+        @apply overflow-hidden;
+    }
+    .signup__ls{
+        @apply  items-center text-center;
+    }
+}
+@media screen and (max-width:700px) {
+    .signup{
+        @apply justify-center h-screen;
+    }
+    .signup__rs{
+        @apply hidden;
+    }
+}

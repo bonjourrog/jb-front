@@ -3,6 +3,7 @@ import Header from "./Components/Header";
 import { HomeProps } from "./Home.props";
 import Hero from "./Components/Hero";
 import Categories from "./Components/Categories";
+import Signup from "./Components/Signup";
 
 const Home:React.FC<HomeProps> = ()=>{
     return <div>
@@ -12,6 +13,7 @@ const Home:React.FC<HomeProps> = ()=>{
         </Element>
         <br />
         <Categories/>
+        <Signup/>
     </div>
 }
 export default Home;
