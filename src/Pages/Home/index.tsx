@@ -4,6 +4,7 @@ import { HomeProps } from "./Home.props";
 import Hero from "./Components/Hero";
 import Categories from "./Components/Categories";
 import Signup from "./Components/Signup";
+import Post from "./Components/Post";
 
 const Home:React.FC<HomeProps> = ()=>{
     return <div>
@@ -14,6 +15,7 @@ const Home:React.FC<HomeProps> = ()=>{
         <br />
         <Categories/>
         <Signup/>
+        <Post/>
     </div>
 }
 export default Home;

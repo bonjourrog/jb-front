@@ -1,0 +1,26 @@
+.post{
+    @apply flex items-center justify-between gap-10 px-20 h-screen bg-[#F6F7FF];
+}
+.post__ls{
+    @apply flex flex-col gap-10 items-start w-3/5 h-96;
+}
+.post__rs{
+    @apply flex flex-col items-start gap-10 w-auto;
+}
+.post__headline{
+    @apply text-5xl font-extrabold leading-snug;
+}
+.post__caption{
+    @apply w-80;
+}
+.post__btn{
+    @apply bg-[#777CE4] text-white px-4 py-2 rounded-full cursor-pointer;
+}
+@media screen and (max-width:800px) {
+    .post__rs{
+        @apply hidden;
+    }
+    .post__ls{
+        @apply flex flex-col items-center w-full text-center;
+    }
+}
