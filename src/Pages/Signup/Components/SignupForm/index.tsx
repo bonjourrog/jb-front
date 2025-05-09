@@ -155,8 +155,8 @@ const SignupForm: React.FC<SignupFormProps> = ({ register, errors }) => {
                     )
                 }
             }}
-            {...register('password')}
-            error={!!errors.password}
+            {...register('confirmPassword')}
+            error={!!errors.confirmPassword}
             helperText={errors.password?.message}
         />
 

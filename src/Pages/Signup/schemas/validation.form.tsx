@@ -5,8 +5,12 @@ export const userSchema = z.object({
     email: z.string().email("Correo inválido"),
     phone: z.string().min(10, "Teléfono inválido"),
     password: z.string().min(6, "La contraseña es muy corta"),
+    confirmPassword: z.string(),
     // location: z.string().min(2, "Ubicación requerida"),
     // photo: z
     //     .instanceof(FileList)
     //     .refine((files) => files.length > 0, "Se requiere una foto"),
+}).refine(data=>data.password===data.confirmPassword,{
+    path:["confirmPassword"],
+    message:'Las contraseñas no coinciden'
 });
