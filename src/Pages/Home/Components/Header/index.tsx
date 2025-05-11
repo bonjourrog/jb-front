@@ -5,14 +5,17 @@ import { Link as LinkScroll } from 'react-scroll';
 import { useEffect, useState } from 'react';
 import { HiMenuAlt3 } from "react-icons/hi";
 import { MdOutlineClose } from "react-icons/md";
+import { useAuthStore } from '../../../../stores/authStore';
 
 const Header:React.FC<HeaderProps> = ()=>{
     const [innerWidth, setInnerWidth] = useState<number>(window.innerWidth);
     const [toggle, setToggle] = useState<boolean>(false);
+    const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
     const handleInnerWidth = ()=>{
         setInnerWidth(window.innerWidth)
     }
     useEffect(()=>{
+        setIsAuthenticated(useAuthStore.getState().isAuthenticated);
         window.addEventListener('resize', handleInnerWidth);
         return ()=> window.removeEventListener('resize', handleInnerWidth);
     },[])
@@ -30,8 +33,14 @@ const Header:React.FC<HeaderProps> = ()=>{
             <li><LinkScroll onClick={()=>{setToggle(false)}} to='hiw' smooth duration={500} spy>¿Cómo funciona?</LinkScroll></li>
         </ul>
         <div className='header__actions'>
-            <Link to={""}>Iniciar sesión</Link>
-            <Link className='register-btn' to={""}>Registrarse</Link>
+            {
+                isAuthenticated
+                ?<Link className='register-btn' to={""}>Explorar</Link>
+                :<>
+                    <Link to={"/login"}>Iniciar sesión</Link>
+                    <Link className='register-btn' to={"/signup"}>Registrarse</Link>
+                </>
+            }
         </div>
     </header>
 }
