@@ -1,19 +1,16 @@
 import './Signup.css'
 import { SignupProps } from './Signup.props';
-// RegistroForm.tsx
-import {
-    Box,
-    Typography,
-    
-    Stack,
-} from "@mui/material";
+import { Box, Typography, Stack } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { userSchema } from './schemas/validation.form';
 import SignupForm from './Components/SignupForm';
 import { RegisterData } from '../../types/user';
+import { User } from '../../entity/user';
+import { useCreateUser } from '../../hooks/useCreateUser';
 
 const Signup: React.FC<SignupProps> = () => {
+    const {createUser} = useCreateUser()
     const {
         register,
         handleSubmit,
@@ -22,9 +19,11 @@ const Signup: React.FC<SignupProps> = () => {
         resolver: zodResolver(userSchema),
     });
 
-    const onSubmit = (data: RegisterData) => {
-        const photo = data.photo[0];
-        console.log({ ...data, photo });
+    const onSubmit = async(data: RegisterData) => {
+        // const photo = data.photo[0];
+        // console.log({ ...data, photo });
+        const newUser:Partial<User> = {...data, role:'user', account:{email:data.email, password:data.password, phone:data.phone}}
+        await createUser(newUser);
     };
 
     return (
