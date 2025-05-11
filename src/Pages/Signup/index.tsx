@@ -8,9 +8,11 @@ import SignupForm from './Components/SignupForm';
 import { RegisterData } from '../../types/user';
 import { User } from '../../entity/user';
 import { useCreateUser } from '../../hooks/useCreateUser';
+import { useNavigate } from 'react-router';
 
 const Signup: React.FC<SignupProps> = () => {
-    const {createUser} = useCreateUser()
+    const {createUser} = useCreateUser();
+    const navigate = useNavigate();
     const {
         register,
         handleSubmit,
@@ -24,6 +26,7 @@ const Signup: React.FC<SignupProps> = () => {
         // console.log({ ...data, photo });
         const newUser:Partial<User> = {...data, role:'user', account:{email:data.email, password:data.password, phone:data.phone}}
         await createUser(newUser);
+        navigate('/login');
     };
 
     return (
