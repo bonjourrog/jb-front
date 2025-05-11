@@ -23,6 +23,7 @@
     "react-router": "^7.3.0",
     "react-scroll": "^1.9.3",
     "react-slideshow-image": "^4.3.2",
+    "react-toastify": "^11.0.5",
     "zod": "^3.24.3"
   },
   "devDependencies": {
