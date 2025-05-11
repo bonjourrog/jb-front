@@ -12,7 +12,7 @@ interface Account{
     email:string;
 	password:string;
 	phone:string;
-	banned:boolean;
+	banned?:boolean;
 }
 interface Company{
     name:string;
