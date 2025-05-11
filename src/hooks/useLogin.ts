@@ -14,7 +14,7 @@ export const useLogin = ()=>{
             setIsLoading(true)
             const {data:token} = await signin(credentials)
             login(token)
-            toast.success('Usuario creado con éxito', {
+            toast.success(`Bienvenido !`, {
                 position: 'top-right',
                 autoClose: 3000,
                 hideProgressBar: false,
