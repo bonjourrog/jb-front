@@ -42,6 +42,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ register, errors }) => {
         {registrationType?
         <Box sx={{
             display: 'flex',
+            width:'100%',
             gap: '1em'
         }}>
             <CustomTextField
@@ -162,9 +163,9 @@ const SignupForm: React.FC<SignupFormProps> = ({ register, errors }) => {
 
         <Button type="submit" variant="contained" sx={{
             display: 'block',
-            padding: '.7em 0',
+            padding: '1em 0',
             background: '#5d6cf7',
-            borderRadius: '.5em',
+            borderRadius: '1em',
             boxShadow: 'none',
             width: '50%',
         }}>
