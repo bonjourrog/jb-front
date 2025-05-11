@@ -7,8 +7,10 @@ import { loginSchema } from "./schemas/login";
 import CustomTextField from "../Signup/Components/CustomeTextField";
 import { EmailOutlined, PasswordOutlined } from "@mui/icons-material";
 import { Link } from "react-router";
+import { useLogin } from "../../hooks/useLogin";
 
 const Signin: React.FC<SigninProps> = () => {
+    const {handleLogin} = useLogin();
     const {
         register,
         handleSubmit,
@@ -16,8 +18,8 @@ const Signin: React.FC<SigninProps> = () => {
     } = useForm<LoginData>({
         resolver: zodResolver(loginSchema)
     });
-    const onSubmit = () => {
-
+    const onSubmit = async(credentials:LoginData) => {
+        await handleLogin({...credentials});
     }
     return <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{
         width: '100%',
@@ -161,7 +163,7 @@ const Signin: React.FC<SigninProps> = () => {
                 </Button>
             </Box>
             <Typography variant="caption" width={400} color='#3f3f3f' textAlign={'center'} display={'block'} mx={'auto'}>
-                <strong>Registrate</strong> y empieza a aplicar a <strong>empleos</strong> <Link to='/signup' className='text-[#5d6cf7] font-bold underline'>Click aquí.</Link>
+                <strong>Registrate</strong> y empieza a aplicar a˝ <strong>empleos</strong> <Link to='/signup' className='text-[#5d6cf7] font-bold underline'>Click aquí.</Link>
             </Typography>
         </Stack>
 
