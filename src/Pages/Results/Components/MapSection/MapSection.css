@@ -1,0 +1,20 @@
+.map-section{
+    @apply relative w-full px-10 h-[11.4375rem];
+}
+.map-section__image{
+    @apply w-full h-full;
+}
+.map-section__content{
+    @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
+}
+.map-section__caption{
+    @apply inline text-zinc-500 text-xl;
+}
+.map-section__btn{
+    @apply flex items-center gap-2  mx-auto bg-[#777CE4] text-white px-6 py-2 rounded-full mt-3;
+}
+@media screen and (max-width:800px) {
+    .map-section{
+        @apply hidden;
+    }
+}

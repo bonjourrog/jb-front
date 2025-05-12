@@ -1,8 +1,9 @@
+import './Results.css';
+import { ResultsProps } from "./Results.props";
 import { HiOutlineBriefcase } from "react-icons/hi2";
 import Filters from './Components/Filters';
 import Header from './Components/Header';
-import './Results.css';
-import { ResultsProps } from "./Results.props";
+import MapSection from './Components/MapSection';
 
 const Results:React.FC<ResultsProps> = ()=>{
     return <main className="results">
@@ -20,7 +21,10 @@ const Results:React.FC<ResultsProps> = ()=>{
                 </section>
                 <Filters/>
             </aside>
-            <section>contenido</section>
+            <section className='w-full'>
+                <MapSection/>
+                <section></section>
+            </section>
         </section>
     </main>
 }
