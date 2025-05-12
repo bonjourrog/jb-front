@@ -1,5 +1,5 @@
 .results-header{
-    @apply  flex justify-between;
+    @apply  flex justify-between pr-10;
 }
 .results-header__logo{
     @apply flex font-bold text-xl text-[#777CE4];
