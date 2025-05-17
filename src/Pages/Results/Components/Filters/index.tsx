@@ -16,18 +16,18 @@ const Filters = () => {
             <FormGroup
                 sx={{
                     '& .MuiSvgIcon-root': { color: '#656565' },
-                    color: '#494949', pl: '1em', fontSize: '.1em'
+                    color: '#494949', pl: '8em', fontSize: '.1em',
                 }}>
-                <FormControlLabel control={<Checkbox size='small' />} label="Medio tiempo" />
-                <FormControlLabel control={<Checkbox size='small' />} label="Tiempo completo" />
-                <FormControlLabel control={<Checkbox size='small' />} label="Practicante" />
-                <FormControlLabel control={<Checkbox size='small' />} label="Temporal" />
-                <FormControlLabel control={<Checkbox size='small' />} label="Proyecto" />
+                <FormControlLabel control={<Checkbox sx={{p:'3em'}} size='small' />} label="Medio tiempo" />
+                <FormControlLabel control={<Checkbox sx={{p:'3em'}} size='small' />} label="Tiempo completo" />
+                <FormControlLabel control={<Checkbox sx={{p:'3em'}} size='small' />} label="Practicante" />
+                <FormControlLabel control={<Checkbox sx={{p:'3em'}} size='small' />} label="Temporal" />
+                <FormControlLabel control={<Checkbox sx={{p:'3em'}} size='small' />} label="Proyecto" />
             </FormGroup>
         </li>
         <li>
             <strong>Salario</strong>
-            <Box sx={{ display: 'flex', gap: '.5em', mt: '1em' }}>
+            <Box sx={{ display: 'flex', gap: '.5em', mt: '.2em' }}>
                 <NumericFormat
                     value={salary.min}
                     onChange={handleSalarychange}
@@ -59,12 +59,12 @@ const Filters = () => {
             <FormGroup
                 sx={{
                     '& .MuiSvgIcon-root': { color: '#656565' },
-                    color: '#494949', pl: '1em', fontSize: '.1em'
+                    color: '#494949', pl: '8em', fontSize: '.1em'
                 }}>
-                <FormControlLabel control={<Checkbox size='small' />} label="nocturno" />
-                <FormControlLabel control={<Checkbox size='small' />} label="vespertino" />
-                <FormControlLabel control={<Checkbox size='small' />} label="matutino" />
-                <FormControlLabel control={<Checkbox size='small' />} label="rotativo" />
+                <FormControlLabel control={<Checkbox sx={{p:'3em'}} size='small' />} label="nocturno" />
+                <FormControlLabel control={<Checkbox sx={{p:'3em'}} size='small' />} label="vespertino" />
+                <FormControlLabel control={<Checkbox sx={{p:'3em'}} size='small' />} label="matutino" />
+                <FormControlLabel control={<Checkbox sx={{p:'3em'}} size='small' />} label="rotativo" />
             </FormGroup>
         </li>
     </ul>
