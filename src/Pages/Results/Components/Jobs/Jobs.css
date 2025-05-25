@@ -1,0 +1,133 @@
+.jobs {
+    @apply relative p-10 max-h-[calc(100dvh-21em)] overflow-hidden;
+}
+
+.list {
+    @apply relative grid gap-10 max-h-[calc(100dvh-20em)] transition-all duration-300 ease-in-out overflow-y-scroll overflow-x-hidden pb-32;
+}
+
+.list--with-details {
+    @apply grid-cols-1 w-2/5;
+}
+
+.list--without-details {
+    @apply grid-cols-3 w-full;
+}
+
+.details {
+    @apply absolute w-[55%] h-[28.7em] border-4 border-indigo-200 bg-white rounded-l-xl transition-all duration-500 ease-in-out;
+}
+
+.details__return-btn{
+    @apply flex items-center justify-start gap-2 p-3 font-bold text-zinc-600;
+}
+
+.details--hide {
+    @apply right-0;
+}
+
+.details--show {
+    @apply -right-[40em];
+}
+
+.job {
+    @apply flex flex-col justify-between gap-4 min-h-[16em] bg-white rounded-2xl p-6 cursor-pointer transition-all duration-150 ease-in-out hover:shadow-lg hover:shadow-gray-200;
+}
+
+.job__content{
+    @apply flex flex-col gap-2;
+}
+
+.job__company {
+    @apply flex gap-1 text-xs font-bold text-zinc-600;
+}
+
+.job__date {
+    @apply text-zinc-500 text-xs;
+}
+
+.job__short-desc {
+    @apply text-sm text-zinc-600;
+}
+
+.job__details {
+    @apply flex flex-wrap items-center gap-2 justify-between w-full font-bold text-xs text-zinc-500;
+}
+
+.job__detail{
+    @apply flex items-center gap-1;
+}
+
+@media screen and (max-width:1200px) {
+    .list--without-details {
+        @apply grid-cols-2;
+    }
+}
+
+@media screen and (max-width:900px) {
+    .jobs {
+        @apply max-h-full;
+    }
+
+    .details {
+        @apply h-full;
+    }
+
+    .list {
+        @apply max-h-[calc(100dvh-18em)] py-5;
+    }
+}
+
+@media screen and (max-width:800px) {
+    .jobs{
+        @apply p-5 py-0 min-h-full overflow-scroll;
+    }
+    .jobs>strong{
+        @apply pl-5;
+    }
+
+    .list {
+        @apply grid-cols-3 w-full max-h-none min-h-full gap-5;
+    }
+
+    .list--with-details {
+        @apply grid-cols-1 w-full p-0;
+    }
+
+    .list--without-details {
+        @apply grid-cols-1 w-full p-0;
+    }
+
+    .details {
+        @apply fixed w-full z-10 rounded-none;
+    }
+
+    .details--show {
+        @apply right-0 -bottom-[70em];
+    }
+
+    .details--hide {
+        @apply right-0 -bottom-0;
+    }
+    .job{
+        @apply flex-row justify-start items-center w-full min-h-full;
+    }
+    .job__content{
+        @apply w-[calc(100%-4em)] gap-1;
+    }
+    .job__details{
+        @apply gap-0;
+    }
+    .job__short-desc{
+        @apply hidden;
+    }
+    .job__date{
+        @apply hidden;
+    }
+}
+
+/* @media screen and (max-width:1200px) {
+    .list{
+        @apply grid-cols-2;
+    }
+} */

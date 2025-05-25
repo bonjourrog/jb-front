@@ -1,11 +1,22 @@
 .results{
     @apply flex flex-col gap-10 h-screen w-screen p-10 pb-0 pr-0 bg-[#F6F7FF];
 }
+.results__content{
+    @apply w-full;
+}
 .left-bar{
     @apply flex flex-col gap-8 w-80;
 }
 @media screen and (max-width:900px) {
     .left-bar{
         @apply hidden;
+    }
+}
+@media screen and (max-width:800px) {
+    .results{
+        @apply p-0 pt-10 h-dvh;
+    }
+    .results__content{
+        @apply p-0;
     }
 }
