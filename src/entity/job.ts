@@ -12,6 +12,8 @@ export interface Job {
     is_formal_job: boolean;
     published: boolean;
     company_id: string;
+    company_name?:string;
+    company_logo?:string;
     created_at: Date;
     updated_at: Date;
 }
