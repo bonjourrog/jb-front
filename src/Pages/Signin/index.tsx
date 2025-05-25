@@ -6,10 +6,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "./schemas/login";
 import CustomTextField from "../Signup/Components/CustomeTextField";
 import { EmailOutlined, PasswordOutlined } from "@mui/icons-material";
-import { Link } from "react-router";
+import { Link, Navigate } from "react-router";
 import { useLogin } from "../../hooks/useLogin";
+import { useAuthStore } from "../../stores/authStore";
 
 const Signin: React.FC<SigninProps> = () => {
+    const {isAuthenticated} = useAuthStore();
+    if(isAuthenticated)return <Navigate to={'/'}/>
     const {handleLogin} = useLogin();
     const {
         register,
