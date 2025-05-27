@@ -1,0 +1,35 @@
+.details {
+    @apply absolute w-[55%] h-[28.7em] border-4 border-indigo-200 bg-white rounded-l-xl transition-all duration-500 ease-in-out;
+}
+
+.details__return-btn {
+    @apply flex items-center justify-start gap-2 p-3 font-bold text-zinc-600;
+}
+
+.details--hide {
+    @apply right-0;
+}
+
+.details--show {
+    @apply -right-[40em];
+}
+
+@media screen and (max-width:900px) {
+    .details {
+        @apply h-full;
+    }
+}
+
+@media screen and (max-width:800px) {
+    .details {
+        @apply fixed w-full z-10 rounded-none;
+    }
+
+    .details--show {
+        @apply right-0 -bottom-[70em];
+    }
+
+    .details--hide {
+        @apply right-0 -bottom-0;
+    }
+}
