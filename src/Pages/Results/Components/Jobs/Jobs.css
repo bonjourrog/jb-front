@@ -14,22 +14,6 @@
     @apply grid-cols-3 w-full;
 }
 
-.details {
-    @apply absolute w-[55%] h-[28.7em] border-4 border-indigo-200 bg-white rounded-l-xl transition-all duration-500 ease-in-out;
-}
-
-.details__return-btn{
-    @apply flex items-center justify-start gap-2 p-3 font-bold text-zinc-600;
-}
-
-.details--hide {
-    @apply right-0;
-}
-
-.details--show {
-    @apply -right-[40em];
-}
-
 .job {
     @apply flex flex-col justify-between gap-4 min-h-[16em] bg-white rounded-2xl p-6 cursor-pointer transition-all duration-150 ease-in-out hover:shadow-lg hover:shadow-gray-200;
 }
@@ -69,10 +53,6 @@
         @apply max-h-full;
     }
 
-    .details {
-        @apply h-full;
-    }
-
     .list {
         @apply max-h-[calc(100dvh-18em)] py-5;
     }
@@ -96,18 +76,6 @@
 
     .list--without-details {
         @apply grid-cols-1 w-full p-0;
-    }
-
-    .details {
-        @apply fixed w-full z-10 rounded-none;
-    }
-
-    .details--show {
-        @apply right-0 -bottom-[70em];
-    }
-
-    .details--hide {
-        @apply right-0 -bottom-0;
     }
     .job{
         @apply flex-row justify-start items-center w-full min-h-full;
