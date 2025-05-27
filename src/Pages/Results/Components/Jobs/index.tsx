@@ -4,10 +4,14 @@ import { Filter } from "../../../../entity/filter";
 import { useJobs } from "../../../../hooks/useJobs";
 import { HiMapPin } from "react-icons/hi2";
 import { HiCash } from "react-icons/hi";
-import { FaArrowLeftLong } from "react-icons/fa6";
+import { useJobStore } from '../../../../stores/jobStore';
+import { Job } from '../../../../entity/job';
+import CompanyLogo from '../CompanyLogo';
+import Details from '../Details';
 
 const Jobs = () => {
     const [showDetails, setShowDetails] = useState<boolean>(false);
+    const {setJob, job} = useJobStore();
     const [filters, setFilters] = useState<Filter>({
         company_id: '',
         contract: '',
@@ -21,26 +25,22 @@ const Jobs = () => {
         const lightness = Math.floor(Math.random() * 15) + 60;  // 60–75%
         return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
     }
+    const handleJobSelected = (job:Job)=>{
+        setJob(job)
+        setShowDetails(true)
+    }
     const { jobs } = useJobs(filters);
     return <section className='jobs'>
         <strong>Recientes</strong>
-        <div className={`details ${showDetails ? 'details--hide' : 'details--show'}`}>
-            <button onClick={() => setShowDetails(!showDetails)} className='details__return-btn'>
-                <FaArrowLeftLong />
-                Regresar
-            </button>
-        </div>
+        <Details job={job} setShowDetails={setShowDetails} showDetails={showDetails}/>
         <ul className={`list ${showDetails ? 'list--with-details' : 'list--without-details'}`}>
             {
                 jobs.map(job => {
                     const color = colorGenerator()
+                    job.color = color;
                     return (
-                    <li key={job._id} className='job' onClick={() => setShowDetails(!showDetails)}>
-                        <div style={{background:color}} className={`flex items-center justify-center w-16 h-16 max-h-16 max-w-16 rounded-lg overflow-hidden shrink-0`}>
-                            {
-                                job.company_logo?<img className='h-full object-cover' src={job.company_logo} alt="" />:<div className='flex items-center justify-center min-w-12 min-h-12 font-bold text-zinc-700 bg-white rounded-full'>jb</div>
-                            }
-                        </div>
+                    <li key={job._id} className='job' onClick={() => handleJobSelected(job)}>
+                        <CompanyLogo color={color} job={job}/>
                         <div className='job__content'>
                             <ul className='job__company'>
                                 <li>{job.industry}</li>·
