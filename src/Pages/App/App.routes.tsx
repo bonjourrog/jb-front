@@ -14,7 +14,7 @@ const AppRoutes = () => {
         { path: '/signup', element: <Signup /> },
         { path: '/login', element: <Signin /> },
         { path: '/dashboard', element: <ProtectedRoute allowedRoles={['company']}><Dashboard /></ProtectedRoute> },
-        { path: '/unauthorizedPage', element: <UnauthorizedPage /> },
+        { path: '/unauthorized', element: <UnauthorizedPage /> },
         { path: '*', element: <p>404 Not Found</p> }
     ])
     return routes;
