@@ -1,0 +1,43 @@
+.dashboard {
+    @apply w-screen h-screen flex bg-zinc-700;
+}
+
+.dashboard__sidebar {
+    @apply h-screen w-72;
+}
+
+.dashboard__content {
+    @apply w-full bg-zinc-100 rounded-3xl overflow-hidden;
+}
+
+.dashboard__content>header {
+    @apply flex items-center w-full h-20 px-4 bg-white;
+}
+
+.dashboard__cards {
+    @apply p-4;
+}
+
+.dashboard__cards>ul {
+    @apply flex gap-4 w-full;
+}
+
+.dashboard__cards>ul>li {
+    @apply w-1/4 min-h-32 p-4 rounded-md bg-white;
+}
+
+.dashboard__charts {
+    @apply w-full h-32 p-4;
+}
+
+.dashboard__charts>div {
+    @apply w-full h-full bg-white rounded-md;
+}
+
+.dashboard__recent-applicants {
+    @apply w-full h-32 p-4;
+}
+
+.dashboard__recent-applicants>div {
+    @apply w-full h-full bg-white rounded-md;
+}
