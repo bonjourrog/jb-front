@@ -1,13 +1,26 @@
 .dashboard {
-    @apply w-screen h-screen flex bg-zinc-700;
+    /* @apply w-screen h-screen flex bg-[#1d1c22]; */
+    @apply w-screen h-screen flex bg-white border-l-2;
 }
 
 .dashboard__sidebar {
     @apply h-screen w-72;
 }
 
+.dashboard__sidebar>ul {
+    @apply flex flex-col justify-center p-4 h-full;
+}
+
+.dashboard__sidebar>ul>li {
+    @apply flex items-center gap-2 cursor-pointer rounded-md p-2;
+}
+
+.dashboard__sidebar>ul>li:hover {
+    @apply bg-indigo-500 text-white;
+}
+
 .dashboard__content {
-    @apply w-full bg-zinc-100 rounded-3xl overflow-hidden;
+    @apply w-full bg-[#f7f8fc] overflow-hidden;
 }
 
 .dashboard__content>header {
