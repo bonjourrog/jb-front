@@ -10,8 +10,6 @@ import { useAuthStore } from '../../stores/authStore';
 function App() {
   useEffect(()=>{
     const token = localStorage.getItem('token')
-    console.log(token);
-    
     if(token){
       try {
         const decoded:any = jwtDecode(token)
@@ -25,6 +23,7 @@ function App() {
         useAuthStore.getState().logout()
       }
     }
+    useAuthStore.getState().setAuthReady();
   },[])
   return (
     <BrowserRouter>
