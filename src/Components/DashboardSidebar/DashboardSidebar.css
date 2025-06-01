@@ -1,0 +1,15 @@
+.dashboard-sidebar {
+    @apply h-screen w-72;
+}
+
+.dashboard-sidebar>ul {
+    @apply flex flex-col justify-center p-4 h-full;
+}
+
+.dashboard-sidebar>ul>li {
+    @apply flex items-center gap-2 cursor-pointer rounded-md p-2;
+}
+
+.dashboard-sidebar>ul>li:hover {
+    @apply bg-indigo-500 text-white;
+}

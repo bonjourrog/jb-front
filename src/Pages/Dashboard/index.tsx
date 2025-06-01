@@ -1,18 +1,11 @@
 import './Dashboard.css';
 import { useAuthStore } from "../../stores/authStore";
-import { BiBriefcase } from 'react-icons/bi';
+import DashboardSidebar from '../../Components/DashboardSidebar';
 
 const Dashboard = ()=>{
     const {} = useAuthStore()
     return <main className="dashboard">
-        <aside className='dashboard__sidebar'>
-            <ul>
-                <li>
-                    <BiBriefcase/>
-                    Empleos
-                </li>
-            </ul>
-        </aside>
+        <DashboardSidebar/>
         <section className='dashboard__content'>
             <header>
                 <strong className='text-[#1d1c22] font-bold'>Welcome</strong>
