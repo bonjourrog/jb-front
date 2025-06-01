@@ -1,11 +1,11 @@
 import './Dashboard.css';
 import { useAuthStore } from "../../stores/authStore";
-import DashboardSidebar from '../../Components/DashboardSidebar';
+import Sidebar from './Components/Sidebar';
 
 const Dashboard = ()=>{
     const {} = useAuthStore()
     return <main className="dashboard">
-        <DashboardSidebar/>
+        <Sidebar/>
         <section className='dashboard__content'>
             <header>
                 <strong className='text-[#1d1c22] font-bold'>Welcome</strong>

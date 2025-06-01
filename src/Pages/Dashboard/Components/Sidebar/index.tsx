@@ -1,7 +1,7 @@
 import './DashboardSidebar.css';
 import { BiBriefcase } from "react-icons/bi"
 
-const DashboardSidebar = ()=>{
+const Sidebar = ()=>{
     return <aside className='dashboard-sidebar'>
             <ul>
                 <li>
@@ -11,4 +11,4 @@ const DashboardSidebar = ()=>{
             </ul>
         </aside>
 }
-export default DashboardSidebar;
+export default Sidebar;
