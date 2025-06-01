@@ -1,4 +1,4 @@
-import './DashboardSidebar.css';
+import './Sidebar.css';
 import { BiBriefcase } from "react-icons/bi"
 
 const Sidebar = ()=>{
