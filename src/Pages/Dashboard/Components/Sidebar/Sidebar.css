@@ -3,11 +3,17 @@
 }
 
 .dashboard-sidebar>ul {
-    @apply flex flex-col justify-center p-4 h-full;
+    @apply flex flex-col justify-center gap-1 p-4 h-full;
 }
 
 .dashboard-sidebar>ul>li {
-    @apply flex items-center gap-2 cursor-pointer rounded-md p-2;
+    @apply cursor-pointer rounded-full p-2;
+}
+.dashboard-sidebar>ul>.active{
+    @apply bg-indigo-500 text-white rounded-full font-bold;
+}
+.dashboard-link{
+    @apply flex items-center gap-2;
 }
 
 .dashboard-sidebar>ul>li:hover {
