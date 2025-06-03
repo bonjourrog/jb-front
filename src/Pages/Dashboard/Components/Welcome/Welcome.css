@@ -1,0 +1,27 @@
+.welcome__cards {
+    @apply p-4;
+}
+
+.welcome__cards>ul {
+    @apply flex gap-4 w-full;
+}
+
+.welcome__cards>ul>li {
+    @apply w-1/4 min-h-32 p-4 rounded-md bg-white;
+}
+
+.welcome__charts {
+    @apply w-full h-32 p-4;
+}
+
+.welcome__charts>div {
+    @apply w-full h-full bg-white rounded-md;
+}
+
+.welcome__recent-applicants {
+    @apply w-full h-32 p-4;
+}
+
+.welcome__recent-applicants>div {
+    @apply w-full h-full bg-white rounded-md;
+}
