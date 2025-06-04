@@ -1,0 +1,51 @@
+.job {
+    @apply flex flex-col justify-between gap-4 min-h-[16em] bg-white rounded-2xl p-6 cursor-pointer transition-all duration-150 ease-in-out hover:shadow-lg hover:shadow-gray-200;
+}
+
+.job__content{
+    @apply flex flex-col gap-2 h-full justify-between;
+}
+
+.job__company {
+    @apply flex gap-1 text-xs font-bold text-zinc-600;
+}
+
+.job__date {
+    @apply text-zinc-500 text-xs;
+}
+
+.job__short-desc {
+    @apply text-sm text-zinc-600;
+}
+
+.job__details {
+    @apply flex flex-wrap items-center gap-2 justify-between w-full font-bold text-xs text-zinc-500;
+}
+
+.job__detail{
+    @apply flex items-center gap-1;
+}
+
+@media screen and (max-width:900px) {
+    .jobs {
+        @apply max-h-full;
+    }
+}
+
+@media screen and (max-width:800px) {
+    .job{
+        @apply flex-row justify-start items-center w-full min-h-full;
+    }
+    .job__content{
+        @apply w-[calc(100%-4em)] gap-1;
+    }
+    .job__details{
+        @apply gap-0;
+    }
+    .job__short-desc{
+        @apply hidden;
+    }
+    .job__date{
+        @apply hidden;
+    }
+}
