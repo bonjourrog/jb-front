@@ -4,16 +4,19 @@ import { Job } from "../../entity/job";
 import { HiCash } from "react-icons/hi";
 import { JobCardProps } from "./JobCard.props";
 import { useJobStore } from "../../stores/jobStore";
-import CompanyLogo from "../CompanyLogo";
+import CompanyLogo from "../../Pages/Results/Components/CompanyLogo";
 
-const JobCard: React.FC<JobCardProps> = ({ job, color, setShowDetails }) => {
+const JobCard: React.FC<JobCardProps> = ({ job, color, setShowDetails, className, icon }) => {
     const {setJob} = useJobStore();
     const handleJobSelected = (job: Job) => {
         setJob(job)
-        setShowDetails(true)
+        if(setShowDetails){
+            setShowDetails(true)
+        }
     }
-    return <li key={job._id} className='job' onClick={() => handleJobSelected(job)}>
+    return <li key={job._id} className={`job ${className ?? ''}`} onClick={() => handleJobSelected(job)}>
         <CompanyLogo color={color} job={job} />
+        {icon?? undefined}
         <div className='job__content'>
             <ul className='job__company'>
                 <li>{job.industry}</li>·
