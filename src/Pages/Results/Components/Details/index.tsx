@@ -1,13 +1,11 @@
 import { HiMapPin } from 'react-icons/hi2';
-import CompanyLogo from '../CompanyLogo';
 import './Details.css';
 import { DetailsProps } from "./Details.props";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { HiCash } from 'react-icons/hi';
-import { useAuthStore } from '../../../../stores/authStore';
+import CompanyLogo from '../../../../Components/CompanyLogo';
 
 const Details: React.FC<DetailsProps> = ({ showDetails, setShowDetails, job }) => {
-    const {isAuthenticated} = useAuthStore()
     return <div className={`details ${showDetails ? 'details--hide' : 'details--show'}`}>
         <button onClick={() => setShowDetails(!showDetails)} className='details__return-btn'>
             <FaArrowLeftLong />
