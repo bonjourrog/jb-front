@@ -7,6 +7,7 @@ import Dashboard from "../Dashboard";
 import UnauthorizedPage from "../Unauthorized";
 import { ProtectedRoute } from "./ProtectedRoutes";
 import Welcome from "../Dashboard/Components/Welcome";
+import JobList from "../Dashboard/Components/JobList";
 
 const AppRoutes = () => {
     let routes = useRoutes([
@@ -17,7 +18,8 @@ const AppRoutes = () => {
         { path: '/dashboard', 
             element: <ProtectedRoute allowedRoles={['company']}><Dashboard /></ProtectedRoute>,
             children:[
-                {index: true, element:<Welcome/>}
+                {index: true, element:<Welcome/>},
+                {path:'job-list', element:<JobList/>}
             ]
         },
         { path: '/unauthorized', element: <UnauthorizedPage /> },
