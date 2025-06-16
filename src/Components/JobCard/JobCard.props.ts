@@ -7,4 +7,5 @@ export interface JobCardProps {
     setShowDetails?: Dispatch<SetStateAction<boolean>>;
     className?: string;
     icon?: ReactNode;
+    showCompanyInfo: boolean;
 }

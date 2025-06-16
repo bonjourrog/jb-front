@@ -6,7 +6,7 @@ import { JobCardProps } from "./JobCard.props";
 import { useJobStore } from "../../stores/jobStore";
 import CompanyLogo from "../../Pages/Results/Components/CompanyLogo";
 
-const JobCard: React.FC<JobCardProps> = ({ job, color, setShowDetails, className, icon }) => {
+const JobCard: React.FC<JobCardProps> = ({ job, color, setShowDetails, className, icon, showCompanyInfo }) => {
     const {setJob} = useJobStore();
     const handleJobSelected = (job: Job) => {
         setJob(job)
