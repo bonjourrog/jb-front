@@ -4,10 +4,9 @@ import { jwtDecode as jwt_decode } from 'jwt-decode';
 import { useAuthStore } from "../../../../stores/authStore";
 import { Filter } from "../../../../entity/filter";
 import { useJobs } from "../../../../hooks/useJobs";
-import {  FormControlLabel, FormGroup, styled, Switch, SwitchProps } from '@mui/material';
+import { styled, Switch, SwitchProps } from '@mui/material';
 import { FiEye } from 'react-icons/fi';
 import JobCard from '../../../../Components/JobCard';
-import { BiRightArrowAlt } from 'react-icons/bi';
 
 const JobList = () => {
     const { token } = useAuthStore();
@@ -133,7 +132,7 @@ const JobList = () => {
         </table> */}
         <ul className='grid grid-cols-3 gap-4 p-4'>
             {jobs.map(job => (
-                <div key={job._id}><JobCard showCompanyInfo={false} color='red' job={job} icon={<FiEye className='absolute right-4 text-zinc-400 hover:text-indigo-500'/>} className='relative'/></div>
+                <div key={job._id}><JobCard showCompanyInfo={true} color='red' job={job} icon={<FiEye className='absolute right-4 text-zinc-400 hover:text-indigo-500'/>} className='relative'/></div>
             ))}
         </ul>
     </section>

@@ -1,0 +1,65 @@
+.new-job-btn {
+    @apply relative flex items-center gap-1 px-4 py-2 rounded-full z-0 transition-all ease-in-out duration-300;
+}
+
+.new-job-btn::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    height: 3em;
+    width: 3em;
+    background: #5f55f146;
+    border-radius: 10em;
+    z-index: -1;
+    transition: all .2s ease-in-out;
+}
+
+.new-job-btn:hover{
+    @apply text-white;
+}
+
+.new-job-btn:hover::after {
+    width: 100%;
+    background: #4a3ef2d1;
+    /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
+    z-index: -1;
+}
+
+table {
+    border-collapse: collapse;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    width: 100%;
+}
+
+table td.editable:hover {
+    background-color: rgb(206, 229, 252);
+    outline: .3em solid rgba(26, 94, 240, 0.307);
+    border-radius: .1em;
+}
+
+table th {
+    padding: 1em 1.2em;
+    background-color: rgb(240, 240, 240);
+    text-align: start;
+}
+
+table>tbody>tr>td {
+    padding: .6em .5em;
+    background-color: white;
+    text-align: start;
+}
+
+table>tbody>tr>td:first-child {
+    padding-left: 1em;
+}
+
+table>tbody>tr {
+    cursor: pointer;
+}
+
+table>tbody>tr:hover {
+    background-color: rgb(226, 236, 255);
+}

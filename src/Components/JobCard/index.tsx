@@ -16,7 +16,12 @@ const JobCard: React.FC<JobCardProps> = ({ job, color, setShowDetails, className
     }
     return <li key={job._id} className={`job ${className ?? ''}`} onClick={() => handleJobSelected(job)}>
         <CompanyLogo color={color} job={job} />
-        {icon?? undefined}
+        {
+            showCompanyInfo?
+            <p className={`job__status ${job.published?'job__status--active':'job__status--inactive'}`}>{job.published?'Activo':'Pausado'}</p>
+            :undefined
+        }
+        {/* {icon?? undefined} */}
         <div className='job__content'>
             <ul className='job__company'>
                 <li>{job.industry}</li>·

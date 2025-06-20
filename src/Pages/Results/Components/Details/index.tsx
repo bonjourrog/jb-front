@@ -3,7 +3,7 @@ import './Details.css';
 import { DetailsProps } from "./Details.props";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { HiCash } from 'react-icons/hi';
-import CompanyLogo from '../../../../Components/CompanyLogo';
+import CompanyLogo from '../CompanyLogo';
 
 const Details: React.FC<DetailsProps> = ({ showDetails, setShowDetails, job }) => {
     return <div className={`details ${showDetails ? 'details--hide' : 'details--show'}`}>

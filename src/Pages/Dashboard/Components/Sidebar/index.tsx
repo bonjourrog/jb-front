@@ -12,8 +12,8 @@ const Sidebar = () => {
                     Home
                 </Link>
             </li>
-            <li className={ location.pathname === '/dashboard/jobs'?'active':''}>
-                <Link to={'/jobs'} className='dashboard-link'>
+            <li className={ location.pathname === '/dashboard/job-list'?'active':''}>
+                <Link to={'/dashboard/job-list'} className='dashboard-link'>
                     <BiBriefcase />
                     Empleos
                 </Link>

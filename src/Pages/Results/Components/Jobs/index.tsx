@@ -32,7 +32,7 @@ const Jobs = () => {
                     const color = colorGenerator()
                     job.color = color;
                     return (
-                        <JobCard color={color} job={job} setShowDetails={setShowDetails}/>
+                        <JobCard showCompanyInfo={false} color={color} job={job} setShowDetails={setShowDetails}/>
                 )
                 })
             }
