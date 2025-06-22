@@ -1,8 +1,12 @@
-.new-job-btn {
+/* .new-job-btn {
     @apply relative flex items-center gap-1 px-4 py-2 rounded-full z-0 transition-all ease-in-out duration-300;
+} */
+
+.new-job-btn{
+    @apply flex  items-center justify-center gap-2 w-full p-2 text-center border-2 border-dashed border-gray-300 text-gray-300 cursor-pointer hover:border-solid hover:bg-indigo-500 hover:border-indigo-500 hover:text-white hover:rounded-md hover:translate-y-2 hover:py-4 hover:shadow-lg transition-all duration-300;
 }
 
-.new-job-btn::after {
+/* .new-job-btn::after {
     content: "";
     position: absolute;
     left: 0;
@@ -21,9 +25,8 @@
 .new-job-btn:hover::after {
     width: 100%;
     background: #4a3ef2d1;
-    /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
     z-index: -1;
-}
+} */
 
 table {
     border-collapse: collapse;

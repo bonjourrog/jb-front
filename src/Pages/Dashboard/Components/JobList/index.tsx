@@ -4,9 +4,9 @@ import { jwtDecode as jwt_decode } from 'jwt-decode';
 import { useAuthStore } from "../../../../stores/authStore";
 import { Filter } from "../../../../entity/filter";
 import { useJobs } from "../../../../hooks/useJobs";
-import { styled, Switch, SwitchProps } from '@mui/material';
+import { FormControlLabel, FormGroup, styled, Switch, SwitchProps } from '@mui/material';
 import { FiEye } from 'react-icons/fi';
-import JobCard from '../../../../Components/JobCard';
+import { MdAdd } from 'react-icons/md';
 
 const JobList = () => {
     const { token } = useAuthStore();
@@ -88,7 +88,7 @@ const JobList = () => {
                 <BiRightArrowAlt/>
             </button>
         </section> */}
-        {/* <table>
+        <table>
             <thead>
                 <tr>
                     <th>Puesto</th>
@@ -105,9 +105,9 @@ const JobList = () => {
                             <strong>{job.title}</strong>
                         </td>
                         <td className='editable'>
-                            <strong className='text-zinc-500'>
+                            <p className='text-zinc-500'>
                                 {Math.trunc(job.salary).toLocaleString('en-US', {style:'currency', currency:'usd', minimumFractionDigits: 0})}
-                            </strong>
+                            </p>
                         </td>
                         <td className='editable'>
                             <div className='flex gap-2'>
@@ -129,12 +129,15 @@ const JobList = () => {
                     </tr>
                 ))}
             </tbody>
-        </table> */}
-        <ul className='grid grid-cols-3 gap-4 p-4'>
+        </table>
+        <div className='new-job-btn'>
+            <MdAdd/>New job
+        </div>
+        {/* <ul className='grid grid-cols-3 gap-4 p-4'>
             {jobs.map(job => (
                 <div key={job._id}><JobCard showCompanyInfo={true} color='red' job={job} icon={<FiEye className='absolute right-4 text-zinc-400 hover:text-indigo-500'/>} className='relative'/></div>
             ))}
-        </ul>
+        </ul> */}
     </section>
 }
 export default JobList;
