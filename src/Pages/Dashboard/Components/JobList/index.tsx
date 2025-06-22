@@ -7,11 +7,13 @@ import { useJobs } from "../../../../hooks/useJobs";
 import { FormControlLabel, FormGroup, styled, Switch, SwitchProps } from '@mui/material';
 import { FiEye } from 'react-icons/fi';
 import { MdAdd } from 'react-icons/md';
+import JobListForm from '../../../../Components/NewJobForm';
 
 const JobList = () => {
     const { token } = useAuthStore();
     if (!token) return <div>No autorizado</div>;
     const decoded: any = jwt_decode(token);
+    const [showForm, setShowForm] = useState<boolean>();
     const [filters, setFilters] = useState<Filter>({
         company_id: decoded.userId,
         contract: '',
@@ -82,6 +84,9 @@ const JobList = () => {
     }));
 
     return <section className='p-10'>
+        <div className={`absolute w-full h-full ${showForm?'top-1/2':'-top-full'} left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 bg-zinc-700/35`}>
+            <JobListForm/>
+        </div>
         {/* <section className='flex justify-end p-10'>
             <button className='new-job-btn'>
                 Nuevo empleo
@@ -130,7 +135,7 @@ const JobList = () => {
                 ))}
             </tbody>
         </table>
-        <div className='new-job-btn'>
+        <div className='new-job-btn' onClick={()=>setShowForm(true)}>
             <MdAdd/>New job
         </div>
         {/* <ul className='grid grid-cols-3 gap-4 p-4'>
