@@ -1,3 +1,5 @@
+import { ContractType, Industry, Schedule } from "../types/job";
+
 export interface Job {
     _id: string;
     title: string;
@@ -6,9 +8,9 @@ export interface Job {
     salary: number;
     benefits: string[];
     location: Location;
-    industry: string;
-    schedule: string;
-    contract_type: string;
+    industry: Industry;
+    schedule: Schedule;
+    contract_type: ContractType;
     is_formal_job: boolean;
     published: boolean;
     company_id: string;
