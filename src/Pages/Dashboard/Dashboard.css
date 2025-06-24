@@ -4,7 +4,7 @@
 }
 
 .dashboard__content {
-    @apply w-full bg-[#f7f8fc] overflow-hidden;
+    @apply w-full bg-[#f7f8fc] overflow-hidden overflow-y-scroll;
 }
 
 .dashboard__content>header {

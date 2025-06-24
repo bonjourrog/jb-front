@@ -87,7 +87,8 @@ const JobList = () => {
         <div className={`absolute w-full h-full ${showForm?'top-1/2':'-top-full'} left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 bg-zinc-700/35`}>
             <JobListForm setShowForm={setShowForm}/>
         </div>
-        <table>
+        <div className='overflow-x-auto p-1 w-auto'>
+            <table>
             <thead>
                 <tr>
                     <th>Puesto</th>
@@ -129,6 +130,7 @@ const JobList = () => {
                 ))}
             </tbody>
         </table>
+        </div>
         <div className='new-job-btn' onClick={()=>setShowForm(true)}>
             <MdAdd/>New job
         </div>
