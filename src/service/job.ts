@@ -6,6 +6,6 @@ export const getJobs = async(filters:Filter)=>{
     return (await api.get('job', {params:{...filters}})).data;
 }
 
-export const createJob = async(job:Job, token:string)=>{
+export const newJob = async(job:Job, token:string)=>{
     return (await api.post('job', job, {headers:{'Authorization':token}})).data
 }
