@@ -4,14 +4,16 @@ import { contractTypes, industries, Industry, NewJobData, schedules } from "../.
 import { zodResolver } from "@hookform/resolvers/zod";
 import { jobSchema } from "./schemas/validation.form";
 import { Autocomplete, Box, Button, Chip, InputAdornment, MenuItem, Select, Stack, Typography } from "@mui/material";
-import { Job } from "../../entity/job";
 import CustomTextField from "../../Pages/Signup/Components/CustomeTextField";
 import { AttachMoney, Description, ListAlt, Storefront, Title } from "@mui/icons-material";
-import { useState } from "react";
+import React, { useState } from "react";
+import { NewJobFormProps } from './newJobForm.props';
+import { useJobs } from '../../hooks/useJobs';
+import { Filter } from '../../entity/filter';
 
-const JobListForm = () => {
+const JobListForm: React.FC<NewJobFormProps> = ({setShowForm}) => {
     const [industry, setIndustry] = useState<Industry | ''>('');
-
+    const {createJob} = useJobs({} as Filter);
     const {
         control,
         register,
@@ -32,9 +34,12 @@ const JobListForm = () => {
     });
 
     const onSubmit = async (data: NewJobData) => {
-        console.log(data);
-
-        // const newJob: Partial<Job> = { ...data }
+        try {
+            createJob(data);
+        } catch (error) {
+            
+        }
+        
     };
 
     return <Box component="form" onSubmit={handleSubmit(onSubmit)} className='new-job-form'>
@@ -259,6 +264,7 @@ const JobListForm = () => {
                     gap: '1em'
                 }}>
                     <Button 
+                    onClick={()=>setShowForm(false)}
                         sx={{ width: '50%', background: 'transparent', border:'.1em solid #c9c9c9', color:'gray', boxShadow:'none', p:'1em',  borderRadius:'1em'}} 
                         variant="contained">Cancelar</Button>
                     <Button 

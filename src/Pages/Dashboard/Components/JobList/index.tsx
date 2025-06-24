@@ -13,7 +13,7 @@ const JobList = () => {
     const { token } = useAuthStore();
     if (!token) return <div>No autorizado</div>;
     const decoded: any = jwt_decode(token);
-    const [showForm, setShowForm] = useState<boolean>();
+    const [showForm, setShowForm] = useState<boolean>(false);
     const [filters, setFilters] = useState<Filter>({
         company_id: decoded.userId,
         contract: '',
@@ -85,14 +85,8 @@ const JobList = () => {
 
     return <section className='p-10'>
         <div className={`absolute w-full h-full ${showForm?'top-1/2':'-top-full'} left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 bg-zinc-700/35`}>
-            <JobListForm/>
+            <JobListForm setShowForm={setShowForm}/>
         </div>
-        {/* <section className='flex justify-end p-10'>
-            <button className='new-job-btn'>
-                Nuevo empleo
-                <BiRightArrowAlt/>
-            </button>
-        </section> */}
         <table>
             <thead>
                 <tr>
