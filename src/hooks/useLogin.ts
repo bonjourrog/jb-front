@@ -1,13 +1,11 @@
 import { useState } from "react"
 import { useAuthStore } from "../stores/authStore";
-import { useNavigate } from "react-router";
 import { signin } from "../service/auth";
 import { toast } from "react-toastify";
 
 export const useLogin = ()=>{
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const login = useAuthStore(s=>s.login);
-    const navigate = useNavigate();
 
     const handleLogin = async(credentials:{email:string, password:string})=>{
         try {
@@ -20,7 +18,6 @@ export const useLogin = ()=>{
                 hideProgressBar: false,
                 theme: 'light',
             });
-            navigate('/')
         } catch (error:any) {
             toast.error(error?.response?.data?.error || 'Error al iniciar sesión');
         }finally{

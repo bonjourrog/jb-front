@@ -6,13 +6,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "./schemas/login";
 import CustomTextField from "../Signup/Components/CustomeTextField";
 import { EmailOutlined, PasswordOutlined } from "@mui/icons-material";
-import { Link, Navigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useLogin } from "../../hooks/useLogin";
 import { useAuthStore } from "../../stores/authStore";
+import { useEffect } from "react";
 
 const Signin: React.FC<SigninProps> = () => {
-    const {isAuthenticated} = useAuthStore();
-    if(isAuthenticated)return <Navigate to={'/'}/>
+    const {isAuthenticated, role} = useAuthStore();
+    const navigate = useNavigate();
     const {handleLogin} = useLogin();
     const {
         register,
@@ -23,7 +24,23 @@ const Signin: React.FC<SigninProps> = () => {
     });
     const onSubmit = async(credentials:LoginData) => {
         await handleLogin({...credentials});
+        
     }
+    // if(isAuthenticated)return <Navigate to={'/'}/>
+    useEffect(()=>{
+        if(role && isAuthenticated){
+            switch(role){
+                case 'user':
+                    navigate('/');
+                    break;
+                case 'company':
+                    navigate('/dashboard');
+                    break;
+                default:
+                    navigate('unauthorized');
+            }
+        }
+    }, [role, navigate, isAuthenticated])
     return <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{
         width: '100%',
         display: "flex",
