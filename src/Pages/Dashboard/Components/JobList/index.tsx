@@ -4,16 +4,21 @@ import { jwtDecode as jwt_decode } from 'jwt-decode';
 import { useAuthStore } from "../../../../stores/authStore";
 import { Filter } from "../../../../entity/filter";
 import { useJobs } from "../../../../hooks/useJobs";
-import { FormControlLabel, FormGroup, styled, Switch, SwitchProps, Tooltip } from '@mui/material';
+import { FormControlLabel, FormGroup, Menu, MenuItem, styled, Switch, SwitchProps} from '@mui/material';
 import { MdAdd } from 'react-icons/md';
 import JobListForm from '../../../../Components/NewJobForm';
-import { MoreVert } from '@mui/icons-material';
+import { Delete, Edit, MoreVert } from '@mui/icons-material';
 
 const JobList = () => {
     const { token } = useAuthStore();
     if (!token) return <div>No autorizado</div>;
     const decoded: any = jwt_decode(token);
     const [showForm, setShowForm] = useState<boolean>(false);
+    const [menuState, setMenuState] = useState<{anchorEl:null | HTMLElement, isOpen:boolean, jobId:string}>({
+        anchorEl: null,
+        isOpen: false,
+        jobId: ''
+    });
     const [filters, setFilters] = useState<Filter>({
         company_id: decoded.userId,
         contract: '',
@@ -103,7 +108,14 @@ const JobList = () => {
                 <tbody>
                     {jobs.map(job => (
                         <tr>
-                            <td className='hover:bg-gray-100'>
+                            <td className='hover:bg-gray-100' onClick={(event) => {
+                                setMenuState({
+                                    anchorEl: event.currentTarget,
+                                    isOpen: true,
+                                    jobId: job._id
+                                });
+                            }}>
+                                
                                 <div className='flex gap-2 justify-center items-start'>
                                     <MoreVert className='text-gray-400' />
                                 </div>
@@ -142,6 +154,29 @@ const JobList = () => {
                     ))}
                 </tbody>
             </table>
+            <Menu
+                id="basic-menu"
+                anchorEl={menuState.anchorEl}
+                open={menuState.isOpen}
+                onClose={() => setMenuState({ anchorEl: null, isOpen: false, jobId: '' })}
+                keepMounted={false}
+                sx={{
+                    '& .MuiPaper-root': {
+                        boxShadow: '0 .2em 1em rgba(0,0,0,0.1)'
+                    }
+                }}
+            >
+                <MenuItem onClick={() => {
+                    console.log('Click edit');
+                }} sx={{mb:2}}>
+                    <div className='flex items-center gap-2 text-sm text-gray-700'><Edit sx={{fontSize:18}}/> Editar</div>
+                </MenuItem>
+                <MenuItem onClick={() => {
+                    console.log('Click delete');
+                }}>
+                    <div className='flex items-center gap-2 text-sm text-gray-700'><Delete sx={{fontSize:18}}/> Eliminar</div>
+                </MenuItem>
+            </Menu>
         </div>
         <div className='new-job-btn' onClick={() => setShowForm(true)}>
             <MdAdd />New job
