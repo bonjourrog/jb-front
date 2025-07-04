@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react"
 import { Job } from "../entity/job";
-import { getJobs, newJob } from "../service/job";
+import { getJobs, newJob, updateJob as updateJobService } from "../service/job";
 import { Filter } from "../entity/filter";
 import { jwtDecode as jwt_decode } from 'jwt-decode';
 import { useAuthStore } from "../stores/authStore";
 import { toast } from "react-toastify";
 import { NewJobData } from "../types/job";
+import { useJobStore } from "../stores/jobStore";
 
 export const useJobs = (filters: Filter) => {
     const { token } = useAuthStore();
-    const [jobs, setJobs] = useState<Job[]>([]);
+    // const [jobs, setJobs]= useState<Job[]>([])
+    const {setJobs, updateJobs} = useJobStore();
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
@@ -28,22 +30,35 @@ export const useJobs = (filters: Filter) => {
         } catch (error: any) {
             toast.error(error?.response?.data?.error || 'Error al crear el empleo');
         }
+    }
 
+    const updateJob = async(job:NewJobData)=>{
+        if (!token) {
+            toast.error("Algo salio mal, recargue la pagina");
+            return;
+        }
+        try {
+            const _newJob: Partial<Job> = { ...job, salary: Number(job.salary)}
+            const response = await updateJobService(_newJob as Job, token);
+            toast.success("Empleo actualizado correctamente");
+            updateJobs(_newJob as Job);
+            return response;
+        } catch (error:any) {
+            console.log(error);
+            
+            toast.error(error?.response?.data?.error || 'Error al modificar el empleo');
+        }
     }
 
     useEffect(() => {
+        if(Object.keys(filters).length===0)return;
         getJobs(filters).then(response => {
-            const data = response;
-            if (Array.isArray(data.data)) {
-                console.log('hola');
-
-                setJobs(data.data);
-            } else {
-                console.warn('No es un array:', data.data);
-            }
+            const {data} = response;
+            setJobs(data);
         })
             .catch(e => setError(e.message || 'Error al cargar empleos'))
-            .finally(() => setIsLoading(false))
+            .finally(() => setIsLoading(false));
     }, []);
-    return {createJob, jobs, isLoading, error}
+
+    return {createJob, updateJob, isLoading, error}
 }

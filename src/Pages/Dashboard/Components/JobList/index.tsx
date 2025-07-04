@@ -8,12 +8,15 @@ import { FormControlLabel, FormGroup, Menu, MenuItem, styled, Switch, SwitchProp
 import { MdAdd } from 'react-icons/md';
 import JobListForm from '../../../../Components/NewJobForm';
 import { Delete, Edit, MoreVert } from '@mui/icons-material';
+import { Job } from '../../../../entity/job';
+import { useJobStore } from '../../../../stores/jobStore';
 
 const JobList = () => {
     const { token } = useAuthStore();
     if (!token) return <div>No autorizado</div>;
     const decoded: any = jwt_decode(token);
     const [showForm, setShowForm] = useState<boolean>(false);
+    const [jobSelected, setJobSelected] = useState<Job | null>(null);
     const [menuState, setMenuState] = useState<{anchorEl:null | HTMLElement, isOpen:boolean, jobId:string}>({
         anchorEl: null,
         isOpen: false,
@@ -26,7 +29,8 @@ const JobList = () => {
         schedule: '',
         search: ''
     });
-    const { jobs } = useJobs(filters);
+    const {} = useJobs(filters);
+    const  {jobs} = useJobStore();
 
     const IOSSwitch = styled((props: SwitchProps) => (
         <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
@@ -87,10 +91,9 @@ const JobList = () => {
             }),
         },
     }));
-
     return <section className='p-10'>
         <div className={`absolute w-full h-full ${showForm ? 'top-1/2' : '-top-full'} left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 bg-zinc-700/35`}>
-            <JobListForm setShowForm={setShowForm} />
+            <JobListForm setShowForm={setShowForm} jobData={jobSelected}/>
         </div>
         <div className='overflow-x-auto p-1 w-auto'>
             <table>
@@ -100,14 +103,14 @@ const JobList = () => {
                         <th>Puesto</th>
                         <th>Salario</th>
                         <th>Beneficios</th>
-                        <th>Descriopcion</th>
-                        <th>Descripcion corta</th>
+                        <th>Descripción</th>
+                        <th>Descripción corta</th>
                         <th>Publicado</th>
                     </tr>
                 </thead>
                 <tbody>
                     {jobs.map(job => (
-                        <tr>
+                        <tr key={job._id}>
                             <td className='hover:bg-gray-100' onClick={(event) => {
                                 setMenuState({
                                     anchorEl: event.currentTarget,
@@ -131,7 +134,7 @@ const JobList = () => {
                             <td className='editable'>
                                 <div className='flex gap-2'>
                                     {job.benefits.map(benefit => (
-                                        <p className='px-2 py-1 text-xs text-emerald-600 bg-emerald-200 rounded-sm'>{benefit}</p>
+                                        <p key={benefit} className='px-2 py-1 text-xs text-emerald-600 bg-emerald-200 rounded-sm'>{benefit}</p>
                                     ))}
                                 </div>
                             </td>
@@ -167,7 +170,10 @@ const JobList = () => {
                 }}
             >
                 <MenuItem onClick={() => {
-                    console.log('Click edit');
+                    const _jobSelected:Job = jobs.filter(j=>j._id === menuState.jobId)[0] as Job;
+                    setJobSelected(_jobSelected);
+                    setShowForm(true);
+                    setMenuState({ anchorEl: null, isOpen: false, jobId: '' });
                 }} sx={{mb:2}}>
                     <div className='flex items-center gap-2 text-sm text-gray-700'><Edit sx={{fontSize:18}}/> Editar</div>
                 </MenuItem>
@@ -178,8 +184,11 @@ const JobList = () => {
                 </MenuItem>
             </Menu>
         </div>
-        <div className='new-job-btn' onClick={() => setShowForm(true)}>
-            <MdAdd />New job
+        <div className='new-job-btn' onClick={() => {
+            setJobSelected(null);
+            setShowForm(true);
+        }}>
+            <MdAdd />Nuevo trabajo
         </div>
         {/* <ul className='grid grid-cols-3 gap-4 p-4'>
             {jobs.map(job => (

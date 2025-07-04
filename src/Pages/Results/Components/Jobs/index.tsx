@@ -8,7 +8,7 @@ import JobCard from '../../../../Components/JobCard';
 
 const Jobs = () => {
     const [showDetails, setShowDetails] = useState<boolean>(false);
-    const {job} = useJobStore();
+    const {job, jobs} = useJobStore();
     const [filters, setFilters] = useState<Filter>({
         company_id: '',
         contract: '',
@@ -22,7 +22,7 @@ const Jobs = () => {
         const lightness = Math.floor(Math.random() * 15) + 60;  // 60–75%
         return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
     }
-    const { jobs } = useJobs(filters);
+    const {} = useJobs(filters);
     return <section className='jobs'>
         <strong>Recientes</strong>
         <Details job={job} setShowDetails={setShowDetails} showDetails={showDetails}/>

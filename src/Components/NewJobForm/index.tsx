@@ -6,17 +6,18 @@ import { jobSchema } from "./schemas/validation.form";
 import { Autocomplete, Box, Button, Chip, InputAdornment, MenuItem, Select, Stack, Typography } from "@mui/material";
 import CustomTextField from "../../Pages/Signup/Components/CustomeTextField";
 import { AttachMoney, Description, ListAlt, Storefront, Title } from "@mui/icons-material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NewJobFormProps } from './newJobForm.props';
 import { useJobs } from '../../hooks/useJobs';
 import { Filter } from '../../entity/filter';
 
-const JobListForm: React.FC<NewJobFormProps> = ({setShowForm}) => {
+const JobListForm: React.FC<NewJobFormProps> = ({ setShowForm, jobData }) => {
     const [industry, setIndustry] = useState<Industry | ''>('');
-    const {createJob} = useJobs({} as Filter);
+    const { createJob, updateJob } = useJobs({} as Filter);
     const {
         control,
         register,
+        reset,
         handleSubmit,
         formState: { errors },
     } = useForm<NewJobData>({
@@ -26,7 +27,7 @@ const JobListForm: React.FC<NewJobFormProps> = ({setShowForm}) => {
             short_description: '',
             description: '',
             salary: '',
-            benefits: [], // 👈 este es el que importa para evitar el error
+            benefits: [],
             industry: industries[0],
             schedule: schedules[0],
             contract_type: contractTypes[0],
@@ -35,12 +36,25 @@ const JobListForm: React.FC<NewJobFormProps> = ({setShowForm}) => {
 
     const onSubmit = async (data: NewJobData) => {
         try {
-            createJob(data);
+            !jobData ? createJob(data) : updateJob({...jobData, ...data});
+            setShowForm(false)
         } catch (error) {
-            
+
         }
-        
     };
+
+    useEffect(() => {
+        reset({
+            title: jobData?.title ?? '',
+            short_description: jobData?.short_description ?? '',
+            description: jobData?.description ?? '',
+            salary: String(jobData?.salary) ?? '',
+            benefits: jobData?.benefits ?? [],
+            industry: jobData?.industry ?? industries[0],
+            schedule: jobData?.schedule ?? schedules[0],
+            contract_type: jobData?.contract_type ?? contractTypes[0],
+        })
+    }, [jobData, reset])
 
     return <Box component="form" onSubmit={handleSubmit(onSubmit)} className='new-job-form'>
         <Stack spacing={2} sx={{
@@ -96,8 +110,8 @@ const JobListForm: React.FC<NewJobFormProps> = ({setShowForm}) => {
                 <Stack sx={{
                     display: 'flex',
                     flexDirection: {
-                        xs:'column',
-                        sm:'row'
+                        xs: 'column',
+                        sm: 'row'
                     },
                     justifyContent: 'space-between',
                     gap: '1em'
@@ -187,7 +201,6 @@ const JobListForm: React.FC<NewJobFormProps> = ({setShowForm}) => {
                         <Autocomplete
                             {...field}
                             options={industries}
-                            value={industry}
                             onInputChange={(_, newInputValue) => setIndustry(newInputValue as Industry)}
                             onChange={(_, newValue) => field.onChange(newValue)}
                             renderInput={(params) => (
@@ -213,8 +226,8 @@ const JobListForm: React.FC<NewJobFormProps> = ({setShowForm}) => {
                 <Stack sx={{
                     display: 'flex',
                     flexDirection: {
-                        xs:'column',
-                        sm:'row'
+                        xs: 'column',
+                        sm: 'row'
                     },
                     gap: '1em',
                 }}>
@@ -223,8 +236,10 @@ const JobListForm: React.FC<NewJobFormProps> = ({setShowForm}) => {
                         control={control}
                         render={({ field }) => (
                             <Select
-                            sx={{borderColor: '#e0e0e0',
-            borderRadius:'1em',}}
+                                sx={{
+                                    borderColor: '#e0e0e0',
+                                    borderRadius: '1em',
+                                }}
                                 {...field}
                                 fullWidth
                                 displayEmpty
@@ -242,8 +257,10 @@ const JobListForm: React.FC<NewJobFormProps> = ({setShowForm}) => {
                         control={control}
                         render={({ field }) => (
                             <Select
-                            sx={{borderColor: '#e0e0e0',
-            borderRadius:'1em',}}
+                                sx={{
+                                    borderColor: '#e0e0e0',
+                                    borderRadius: '1em',
+                                }}
                                 {...field}
                                 fullWidth
                                 displayEmpty
@@ -263,12 +280,12 @@ const JobListForm: React.FC<NewJobFormProps> = ({setShowForm}) => {
                     justifyContent: 'space-between',
                     gap: '1em'
                 }}>
-                    <Button 
-                    onClick={()=>setShowForm(false)}
-                        sx={{ width: '50%', background: 'transparent', border:'.1em solid #c9c9c9', color:'gray', boxShadow:'none', p:'1em',  borderRadius:'1em'}} 
+                    <Button
+                        onClick={() => setShowForm(false)}
+                        sx={{ width: '50%', background: 'transparent', border: '.1em solid #c9c9c9', color: 'gray', boxShadow: 'none', p: '1em', borderRadius: '1em' }}
                         variant="contained">Cancelar</Button>
-                    <Button 
-                        sx={{ width: '50%', background: '#6266F1', boxShadow:'none', borderRadius:'1em' }} variant="contained" color="error" type="submit">Crear</Button>
+                    <Button
+                        sx={{ width: '50%', background: '#6266F1', boxShadow: 'none', borderRadius: '1em' }} variant="contained" color="error" type="submit">{!jobData ? 'Crear' : 'modificar'}</Button>
                 </Stack>
             </Box>
         </Stack>
