@@ -9,3 +9,9 @@ export const getJobs = async(filters:Filter)=>{
 export const newJob = async(job:Job, token:string)=>{
     return (await api.post('job', job, {headers:{'Authorization':token}})).data
 }
+
+export const updateJob = async(job:Job, token:string)=>{
+    console.log(job);
+    
+    return (await api.put('job', job, {headers:{'Authorization':token}})).data
+}
