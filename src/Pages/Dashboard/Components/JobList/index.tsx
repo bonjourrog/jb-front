@@ -29,8 +29,16 @@ const JobList = () => {
         schedule: '',
         search: ''
     });
-    const {} = useJobs(filters);
-    const  {jobs} = useJobStore();
+    const {deleteJob} = useJobs(filters);
+    const  {jobs, setJobs} = useJobStore();
+
+    const handleJobDelete = async()=>{
+        const _jobSelected:Job = jobs.filter(j=>j._id === menuState.jobId)[0] as Job;
+        setJobSelected(_jobSelected);
+        await deleteJob(_jobSelected._id)
+        const newJobs:Job[] = jobs.filter(j=>j._id!==_jobSelected._id)
+        setJobs(newJobs);
+    }
 
     const IOSSwitch = styled((props: SwitchProps) => (
         <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
@@ -179,6 +187,7 @@ const JobList = () => {
                 </MenuItem>
                 <MenuItem onClick={() => {
                     console.log('Click delete');
+                    handleJobDelete()
                 }}>
                     <div className='flex items-center gap-2 text-sm text-gray-700'><Delete sx={{fontSize:18}}/> Eliminar</div>
                 </MenuItem>
