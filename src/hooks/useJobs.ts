@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { Job } from "../entity/job";
-import { getJobs, newJob, updateJob as updateJobService } from "../service/job";
+import { getJobs, newJob, updateJob as updateJobService, deleteJob as deleteJobService } from "../service/job";
 import { Filter } from "../entity/filter";
 import { jwtDecode as jwt_decode } from 'jwt-decode';
 import { useAuthStore } from "../stores/authStore";
@@ -44,9 +44,23 @@ export const useJobs = (filters: Filter) => {
             updateJobs(_newJob as Job);
             return response;
         } catch (error:any) {
+            toast.error(error?.response?.data?.error || 'Error al modificar el empleo');
+        }
+    }
+    
+    const deleteJob = async(job_id: string)=>{
+        if (!token) {
+            toast.error("Algo salio mal, recargue la pagina");
+            return;
+        }
+        try {
+            const response = await deleteJobService(job_id, token)
+            toast.success('empleo eliminado correctamente')
+            return response
+        } catch (error:any) {
             console.log(error);
             
-            toast.error(error?.response?.data?.error || 'Error al modificar el empleo');
+            toast.error(error?.response?.data?.error || 'Error al eliminar el empleo');
         }
     }
 
@@ -60,5 +74,5 @@ export const useJobs = (filters: Filter) => {
             .finally(() => setIsLoading(false));
     }, []);
 
-    return {createJob, updateJob, isLoading, error}
+    return {createJob, updateJob, deleteJob, isLoading, error}
 }
