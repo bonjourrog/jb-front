@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { Job } from "../entity/job";
-import { getJobs, newJob, updateJob as updateJobService, deleteJob as deleteJobService } from "../service/job";
+import { getJobs, newJob, updateJob as updateJobService, deleteJob as deleteJobService, applyJob as applyJobService } from "../service/job";
 import { Filter } from "../entity/filter";
 import { jwtDecode as jwt_decode } from 'jwt-decode';
 import { useAuthStore } from "../stores/authStore";
@@ -11,9 +11,37 @@ import { useJobStore } from "../stores/jobStore";
 export const useJobs = (filters: Filter) => {
     const { token } = useAuthStore();
     // const [jobs, setJobs]= useState<Job[]>([])
-    const {setJobs, updateJobs} = useJobStore();
+    const {setJobs, updateJobs, jobs} = useJobStore();
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
+
+    const applyJob = async (job_id: string) => {
+        if (!token) {
+            toast.error("Algo salió mal, recargue la página");
+            return;
+        }
+        try {
+            await applyJobService(job_id, token);
+            const newJobs = jobs.filter(job => job._id !== job_id);
+            setJobs(newJobs);
+            toast.success("Aplicación enviada correctamente");
+        } catch (error: any) {
+            // Traducción de errores comunes
+            const apiError = error?.response?.data?.message || '';
+            
+            let errorMsg = 'Error al aplicar al empleo';
+            if (apiError.includes('already applied')) {
+                errorMsg = 'Ya has aplicado a este empleo';
+                toast.info(errorMsg);
+                return
+            } else if (apiError.includes('not found')) {
+                errorMsg = 'El empleo no existe';
+            } else if (apiError.includes('token')) {
+                errorMsg = 'Sesión expirada, inicia sesión de nuevo';
+            }
+            toast.error(errorMsg);
+        }
+    }
 
     const createJob = async (data: NewJobData): Promise<any> => {
         if (!token) {
@@ -74,5 +102,5 @@ export const useJobs = (filters: Filter) => {
             .finally(() => setIsLoading(false));
     }, []);
 
-    return {createJob, updateJob, deleteJob, isLoading, error}
+    return {createJob, updateJob, deleteJob, applyJob, isLoading, error}
 }
