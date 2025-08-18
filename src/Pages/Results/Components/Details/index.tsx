@@ -4,8 +4,17 @@ import { DetailsProps } from "./Details.props";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { HiCash } from 'react-icons/hi';
 import CompanyLogo from '../CompanyLogo';
+import { useJobs } from '../../../../hooks/useJobs';
+import { Filter } from '../../../../entity/filter';
 
 const Details: React.FC<DetailsProps> = ({ showDetails, setShowDetails, job }) => {
+    const { applyJob } = useJobs({} as Filter); // Assuming you want to use the applyJob function here
+
+    const handleApplyJob = async () => {
+        if (job) {
+            await applyJob(job._id);
+        }
+    }
     return <div className={`details ${showDetails ? 'details--hide' : 'details--show'}`}>
         <button onClick={() => setShowDetails(!showDetails)} className='details__return-btn'>
             <FaArrowLeftLong />
@@ -34,7 +43,7 @@ const Details: React.FC<DetailsProps> = ({ showDetails, setShowDetails, job }) =
                         </ul>
                     </div>
                 </div>
-                <button className='px-3 py-1 rounded-full bg-[#777CE4] font-bold  text-white'>Postular</button>
+                <button onClick={handleApplyJob} className='px-3 py-1 rounded-full bg-[#777CE4] font-bold  text-white'>Postular</button>
                 <ul className='flex gap-2'>
                     {
                         job.benefits?job.benefits.map(benefit=>(
