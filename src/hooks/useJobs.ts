@@ -100,7 +100,7 @@ export const useJobs = (filters: Filter) => {
         })
             .catch(e => setError(e.message || 'Error al cargar empleos'))
             .finally(() => setIsLoading(false));
-    }, []);
+    }, [filters]);
 
     return {createJob, updateJob, deleteJob, applyJob, isLoading, error}
 }
