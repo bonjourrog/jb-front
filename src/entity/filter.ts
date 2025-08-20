@@ -4,4 +4,5 @@ export interface Filter{
     contract:string;
     industry:string;
     company_id:string;
+    user_id?:string;
 }
