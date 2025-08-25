@@ -6,11 +6,24 @@ import { HiCash } from 'react-icons/hi';
 import CompanyLogo from '../CompanyLogo';
 import { useJobs } from '../../../../hooks/useJobs';
 import { Filter } from '../../../../entity/filter';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
 
 const Details: React.FC<DetailsProps> = ({ showDetails, setShowDetails, job }) => {
-    const { applyJob } = useJobs({} as Filter); // Assuming you want to use the applyJob function here
+    const { applyJob } = useJobs({} as Filter);
+    const [userisLogged, setUserisLogged] = useState<boolean>(false);
+    const navigate = useNavigate();
+    useEffect(()=>{
+        const token: string | null = localStorage.getItem('token');
+        if(token) setUserisLogged(true);
+        else setUserisLogged(false);
+    }, [])
 
     const handleApplyJob = async () => {
+        if (!userisLogged){
+            navigate('/login');
+            return;
+        }
         if (job) {
             await applyJob(job._id);
         }
