@@ -46,13 +46,19 @@ const Jobs = () => {
         <Details job={job} setShowDetails={setShowDetails} showDetails={showDetails}/>
         <ul className={`list ${showDetails ? 'list--with-details' : 'list--without-details'}`}>
             {
-                jobs.map(job => {
+                jobs?.length > 0 ? jobs.map(job => {
                     const color = colorGenerator()
                     job.color = color;
                     return (
                         <JobCard showCompanyInfo={false} color={color} job={job} setShowDetails={setShowDetails}/>
                 )
-                })
+                }) : <div style={{ textAlign: 'center', padding: '2rem', color: '#555' }}>
+        <span style={{ fontSize: '3rem', display: 'block' }}>😔</span>
+        <p style={{ fontSize: '1.2rem', marginTop: '0.5rem' }}>
+            ¡No hay vacantes disponibles por ahora!
+        </p>
+        <p>Vuelve más tarde para ver nuevas oportunidades.</p>
+    </div>
             }
         </ul>
     </section>
