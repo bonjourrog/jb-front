@@ -6,9 +6,13 @@ import { useEffect, useState } from 'react';
 import { BiFilter, BiUser } from 'react-icons/bi';
 import { HiOutlineLogout } from 'react-icons/hi';
 import { IoSettingsOutline } from 'react-icons/io5';
+import { useAuthStore } from '../../../../stores/authStore';
+import { useNavigate } from 'react-router';
 const Header = () => {
     const [innerWidth, setInnerWidth] = useState<number>(window.innerWidth);
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const navigate = useNavigate();
+    const {logout} = useAuthStore()
     const open = Boolean(anchorEl);
     const handleInnerWidth = () => {
         setInnerWidth(window.innerWidth);
@@ -18,6 +22,11 @@ const Header = () => {
     };
     const handleClose = () => {
         setAnchorEl(null);
+    };
+    const handleLogout = () => {
+        logout();
+        handleClose();
+        navigate('/login');
     };
     useEffect(() => {
         window.addEventListener('resize', handleInnerWidth);
@@ -61,7 +70,7 @@ const Header = () => {
                         Plan Basico
                         <button className='p-2 rounded-md bg-blue-200 text-blue-500'>Actualizar</button>
                     </li>
-                    <li className='option-list__item' onClick={handleClose}><HiOutlineLogout />Cerrar sesión</li>
+                    <li className='option-list__item' onClick={handleLogout}><HiOutlineLogout />Cerrar sesión</li>
                 </ul>
             </li>
             

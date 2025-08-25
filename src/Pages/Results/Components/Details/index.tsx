@@ -13,11 +13,11 @@ const Details: React.FC<DetailsProps> = ({ showDetails, setShowDetails, job }) =
     const { applyJob } = useJobs({} as Filter);
     const [userisLogged, setUserisLogged] = useState<boolean>(false);
     const navigate = useNavigate();
+    const token: string | null = localStorage.getItem('token');
     useEffect(()=>{
-        const token: string | null = localStorage.getItem('token');
         if(token) setUserisLogged(true);
         else setUserisLogged(false);
-    }, [])
+    }, [token])
 
     const handleApplyJob = async () => {
         if (!userisLogged){
