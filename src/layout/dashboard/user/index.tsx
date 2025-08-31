@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router";
+import { Link, Outlet, useNavigate } from "react-router";
 import { UserLayoutProps } from "./user.props";
 import { LuListTodo } from "react-icons/lu";
 import { MdOutlineBookmarkBorder } from "react-icons/md";
@@ -6,8 +6,15 @@ import { RiAccountCircle2Line } from "react-icons/ri";
 import { PiPasswordBold } from "react-icons/pi";
 import { MdOutlineNotificationsNone } from "react-icons/md";
 import { LuSettings } from "react-icons/lu";
+import { useAuthStore } from "../../../stores/authStore";
 
 const UserLayout: React.FC<UserLayoutProps> = () => {
+    const {logout} = useAuthStore();
+    const navigate = useNavigate();
+    const handleLogout = ()=>{
+        logout();
+        navigate('/');
+    }
     return <main className="flex min-h-screen min-w-screen">
         <nav className="flex flex-col justify-between items-center min-h-full w-48 pl-0 pr-0 pt-28 pb-10" style={{boxShadow:'.3em .3em 1em rgba(0,0,0,0.1)'}}>
             <ul className="flex flex-col gap-2 text-blue-500">
@@ -47,7 +54,7 @@ const UserLayout: React.FC<UserLayoutProps> = () => {
                     </ul>
                 </li>
             </ul>
-            <button className="px-2 py-1 rounded-lg bg-red-100 text-red-400">Cerrar sesion</button>
+            <button onClick={handleLogout} className="px-2 py-1 rounded-lg bg-red-100 text-red-400">Cerrar sesion</button>
         </nav>
         <section className="flex flex-col flex-1">
             <header className="w-full p-10 bg-white">
