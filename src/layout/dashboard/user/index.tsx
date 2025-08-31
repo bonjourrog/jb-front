@@ -1,4 +1,4 @@
-import { Outlet } from "react-router";
+import { Link, Outlet } from "react-router";
 import { UserLayoutProps } from "./user.props";
 import { LuListTodo } from "react-icons/lu";
 import { MdOutlineBookmarkBorder } from "react-icons/md";
@@ -17,9 +17,12 @@ const UserLayout: React.FC<UserLayoutProps> = () => {
                             <RiAccountCircle2Line />
                             Ver prefil
                         </li>
-                        <li className="flex items-center gap-2 px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-500 rounded-lg">
-                            <LuListTodo />
-                            Postulaciones
+                        <li>
+                            <Link  className="flex items-center gap-2 px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-500 rounded-lg" to={'/user/applied'}>
+
+                                <LuListTodo />
+                                Postulaciones
+                            </Link>
                         </li>
                         <li className="flex items-center gap-2 px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-500 rounded-lg">
                             <MdOutlineBookmarkBorder />
