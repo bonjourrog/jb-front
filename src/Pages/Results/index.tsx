@@ -5,6 +5,7 @@ import Filters from './Components/Filters';
 import Header from './Components/Header';
 import MapSection from './Components/MapSection';
 import Jobs from './Components/Jobs';
+import { Link } from 'react-router';
 
 const Results: React.FC<ResultsProps> = () => {
     return <main className="results">
@@ -14,11 +15,10 @@ const Results: React.FC<ResultsProps> = () => {
                 <section className='flex flex-col items-center justify-center gap-4 w-full h-60 bg-white rounded-3xl'>
                     <div className='w-20 h-20 rounded-full bg-gray-200'></div>
                     <strong className="text-zinc-700">Rogelio Beltran</strong>
-                    {/* <hr className='w-3/4'/> */}
-                    <button className="flex gap-2 items-center text-gray-600 border-t pt-2 text-sm">
+                    <Link to={'/user/applied'} className="flex gap-2 items-center text-gray-600 border-t pt-2 text-sm">
                         <HiOutlineBriefcase />
                         ver publicaciones
-                    </button>
+                    </Link>
                 </section>
                 <Filters />
             </aside>
