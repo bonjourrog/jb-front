@@ -9,7 +9,6 @@ interface Props{
 
 export const ProtectedRoute: React.FC<Props> = ({children, allowedRoles})=>{
     const {isAuthenticated, role, isAuthReady} = useAuthStore();
-    console.log(isAuthenticated);
     if (!isAuthReady) return null;
     if(!isAuthenticated) return <Navigate to='/login'/>;
     if(allowedRoles && !allowedRoles.includes(role!)) return <Navigate to='/unauthorized'/>;
