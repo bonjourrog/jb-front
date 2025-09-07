@@ -7,12 +7,12 @@ import { BiFilter, BiUser } from 'react-icons/bi';
 import { HiOutlineLogout } from 'react-icons/hi';
 import { IoSettingsOutline } from 'react-icons/io5';
 import { useAuthStore } from '../../../../stores/authStore';
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 const Header = () => {
     const [innerWidth, setInnerWidth] = useState<number>(window.innerWidth);
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const navigate = useNavigate();
-    const {logout} = useAuthStore()
+    const {logout, isAuthenticated} = useAuthStore()
     const open = Boolean(anchorEl);
     const handleInnerWidth = () => {
         setInnerWidth(window.innerWidth);
@@ -44,6 +44,7 @@ const Header = () => {
                 <BiFilter />
             </div>
         </div>
+        {isAuthenticated?
         <ul className={`user-menu ${open ? 'bg-white rounded-t-xl' : ''}`}>
 
             {
@@ -75,6 +76,14 @@ const Header = () => {
             </li>
             
         </ul>
+        :<ul className='flex gap-3 items-center'>
+            <Link to={'/login'} ><li className='cursor-pointer hover:text-indigo-600'>Iniciar sesión</li></Link>
+            <li className='cursor-pointer bg-indigo-500 text-white p-2 px-4 rounded-full'>
+
+                <Link to={'/signup'}>Registrate</Link>
+            </li>
+        </ul>
+}
         {open?<div onClick={handleClose} className={`absolute w-screen h-screen bg-zinc-500 z-10 opacity-0 p-0 m-0`}></div>:undefined}
     </header>
 }
