@@ -10,9 +10,9 @@ const Applied = () => {
         const { data, error, status } = await getApplication()
         if (status === 'success' && data != null) {
             const { applications } = data
-            const _applications: Application[] = applications.map((elem: any) => ({ ...elem.application, job: elem.company }))
+            
+            const _applications: Application[] = applications.map((elem: any) => ({ ...elem}))
             setApps(_applications)
-            console.log(_applications);
         } else {
             console.log(error);
         }
