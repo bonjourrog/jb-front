@@ -33,7 +33,7 @@ const Applied = () => {
             {
                 apps.length > 0 ?
                     <AppsTable apps={apps}/>
-                    : <p>LAs vacantes que apliques apareceran aqui</p>
+                    : <p className="text-xl font-bold text-zinc-400">Las vacantes que apliques apareceran aqui</p>
             }
         </div>
 
