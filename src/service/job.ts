@@ -17,7 +17,3 @@ export const updateJob = async(job:Job, token:string)=>{
 export const deleteJob = async(job_id: string, token: string)=>{
     return (await api.delete(`job/${job_id}`, {headers:{'Authorization':token}})).data
 }
-
-export const applyJob = async(job_id: string, token: string)=>{
-    return (await api.post(`job/${job_id}/apply`, {}, {headers:{'Authorization':token}})).data
-}
