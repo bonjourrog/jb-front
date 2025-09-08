@@ -4,22 +4,31 @@ import { formatDateToSpanish, numberToCurrency } from "../../../../utils/formatt
 import { ApplicationStatus } from "../../../../types/application";
 import { TbEye } from "react-icons/tb";
 import { AppsTableProps } from "./AppsTable.props";
+import AppDetails from "../AppDetails";
+import { useState } from "react";
+import { Job } from "../../../../entity/job";
+import { applicationStatusColors } from "../../../../data/Status";
 
-const AppsTable:React.FC<AppsTableProps> = ({apps}) => {
-    const applicationStatusColors = {
-            Received: { bg: "#E0E0E0", text: "#616161" }, // gris claro / gris oscuro
-            Viewed: { bg: "#BBDEFB", text: "#1976D2" }, // azul claro / azul fuerte
-            InProcess: { bg: "#FFE082", text: "#F57F17" }, // amarillo claro / naranja fuerte
-            Rejected: { bg: "#FFCDD2", text: "#C62828" }, // rojo claro / rojo fuerte
-            Accepted: { bg: "#C8E6C9", text: "#2E7D32" }, // verde claro / verde fuerte
-            Cancelled: { bg: "#D7CCC8", text: "#4E342E" }, // marrón claro / marrón fuerte
-            OnHold: { bg: "#FFE0B2", text: "#EF6C00" }  // naranja claro / naranja fuerte
-        } as const;
-        const handleStatusColor = (status: ApplicationStatus): { bg: string; text: string } => {
-            return status == "Viewed" || status == "InProcess" ? applicationStatusColors["Viewed"] : status == "Rejected" || status === "Cancelled" ? applicationStatusColors["Cancelled"] :
-                applicationStatusColors[status];
-        }
+const AppsTable: React.FC<AppsTableProps> = ({ apps }) => {
+    const [jobSelected, setJobSelected] = useState<{job:Job, status: string} | null>(null)
+    
+    const handleStatusColor = (status: ApplicationStatus): { bg: string; text: string } => {
+        return status == "Viewed" || status == "InProcess" ? applicationStatusColors["Viewed"] : status == "Rejected" || status === "Cancelled" ? applicationStatusColors["Cancelled"] :
+            applicationStatusColors[status];
+    }
+    const handleSelectedJob = (job: Job, status:ApplicationStatus) => {
+        
+        setJobSelected({ job:job, status: status})
+    }
     return <TableContainer component={Paper} elevation={0}>
+        {jobSelected ?
+            <>
+                <div onClick={()=>setJobSelected(null)} className="fixed bg-zinc-950 opacity-5 w-screen h-screen top-0 left-0">Cerrar</div>
+                <div className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-[96%] md:w-[90%] lg:w-[50em] h-[70vh] bg-white shadow-lg shadow-zinc-200 rounded-lg overflow-y-scroll">
+                    <AppDetails job={jobSelected.job} status={jobSelected.status as ApplicationStatus} />
+                </div>
+            </>
+            : undefined}
         <Table className="bg-sl" size="small" sx={{
             minWidth: 650, borderCollapse: "collapse",
             "& td, & th": {
@@ -51,8 +60,10 @@ const AppsTable:React.FC<AppsTableProps> = ({apps}) => {
                 </TableRow>
             </TableHead>
             <TableBody>
-                {apps.map((job) => (
-                    <TableRow
+                {apps.map((job) => {
+                    console.log(job.status);
+                    
+                    return <TableRow
                         key={job._id}
                         sx={{
                             border: '.1em solid white',
@@ -65,10 +76,10 @@ const AppsTable:React.FC<AppsTableProps> = ({apps}) => {
                             }
                         }}
                     >
-                        <TableCell sx={{ fontWeight: 900 }} align="left">{job.job.title}</TableCell>
+                        <TableCell sx={{ fontWeight: 900 }} align="left">{job.title}</TableCell>
                         <TableCell sx={{ fontWeight: 900 }} align="left">
                             <ul className="flex gap-2 flex-wrap text-xs">
-                                {job.job.benefits.slice(0, 3).map((elem, index) => (
+                                {job.benefits.slice(0, 3).map((elem, index) => (
                                     <li
                                         key={index}
                                         className="py-1 px-3 rounded-full bg-emerald-100 text-emerald-500"
@@ -77,21 +88,21 @@ const AppsTable:React.FC<AppsTableProps> = ({apps}) => {
                                     </li>
                                 ))}
 
-                                {job.job.benefits.length > 3 && (
+                                {job.benefits.length > 3 && (
                                     <li className="py-1 px-3 rounded-full bg-emerald-100 text-emerald-500 flex items-center gap-1">
                                         <BiPlus size={14} />
-                                        {job.job.benefits.length - 3}
+                                        {job.benefits.length - 3}
                                     </li>
                                 )}
                             </ul>
                         </TableCell>
                         <TableCell align="left">{formatDateToSpanish(job.applied_at)}</TableCell>
-                        <TableCell align="left">{numberToCurrency(job.job.salary)}</TableCell>
+                        <TableCell align="left">{numberToCurrency(job.salary)}</TableCell>
                         <TableCell sx={{ py: 2, width: 150 }} align="left">
                             <div
                                 style={{
-                                    backgroundColor: handleStatusColor(job.status as ApplicationStatus).bg,
-                                    color: handleStatusColor(job.status as ApplicationStatus).text
+                                    backgroundColor: handleStatusColor(job.status ? job.status as ApplicationStatus:"Received").bg,
+                                    color: handleStatusColor(job.status ? job.status as ApplicationStatus:"Received").text
                                 }}
                                 className={`
                                                 border
@@ -101,11 +112,11 @@ const AppsTable:React.FC<AppsTableProps> = ({apps}) => {
                                                 font-bold`}
                             >{job.status}</div>
                         </TableCell>
-                        <TableCell sx={{ width: 50, ":hover": { bgcolor: '#bfdbfe' } }} align="left">
+                        <TableCell onClick={() => handleSelectedJob(job, job.status as ApplicationStatus)} sx={{ width: 50, ":hover": { bgcolor: '#bfdbfe' } }} align="left">
                             <TbEye size={25} className="text-zinc-500" />
                         </TableCell>
                     </TableRow>
-                ))}
+                })}
             </TableBody>
         </Table>
         <p className="py-2 text-xs text-zinc-500 text-center">Lista de postulaciones</p>
