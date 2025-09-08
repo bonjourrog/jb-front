@@ -4,13 +4,12 @@ import { DetailsProps } from "./Details.props";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { HiCash } from 'react-icons/hi';
 import CompanyLogo from '../CompanyLogo';
-import { useJobs } from '../../../../hooks/useJobs';
-import { Filter } from '../../../../entity/filter';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
+import { useUserApplication } from '../../../../hooks/useUserApplication';
 
 const Details: React.FC<DetailsProps> = ({ showDetails, setShowDetails, job }) => {
-    const { applyJob } = useJobs({} as Filter);
+    const { applyJob } = useUserApplication()
     const [userisLogged, setUserisLogged] = useState<boolean>(false);
     const navigate = useNavigate();
     const token: string | null = localStorage.getItem('token');
