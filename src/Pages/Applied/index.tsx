@@ -21,14 +21,6 @@ const Applied = () => {
         handleGetApplications()
     }, [])
     return <section className="flex flex-col gap-10 w-full h-full bg-slate-100 rounded-lg p-10">
-        <section>
-            <nav>
-                <ul className="flex gap-10">
-                    <li className="border-b border-blue-400 cursor-pointer">postulaciones</li>
-                    <li className="border-b border-green-400 cursor-pointer">Guardados</li>
-                </ul>
-            </nav>
-        </section>
         <div className="h-full max-h-full">
             {
                 apps.length > 0 ?

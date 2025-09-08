@@ -7,8 +7,10 @@ import { PiPasswordBold } from "react-icons/pi";
 import { MdOutlineNotificationsNone } from "react-icons/md";
 import { LuSettings } from "react-icons/lu";
 import { useAuthStore } from "../../../stores/authStore";
+import { useState } from "react";
 
 const UserLayout: React.FC<UserLayoutProps> = () => {
+    const [tab, setTab] = useState<string>('applied');
     const {logout} = useAuthStore();
     const navigate = useNavigate();
     const handleLogout = ()=>{
@@ -60,6 +62,14 @@ const UserLayout: React.FC<UserLayoutProps> = () => {
             <header className="w-full p-10 bg-white">
                 Bienvenido
             </header>
+            <section className="pt-10 pl-10 bg-slate-100">
+                <nav>
+                    <ul className="flex gap-10">
+                        <li onClick={()=>setTab('applied')} className={`border-b-2 ${tab==='applied'?'border-blue-400':'text-zinc-400'} cursor-pointer`}>postulaciones</li>
+                        <li onClick={()=>setTab('saved')} className={`border-b-2 ${tab==='saved'?'border-green-400':'text-zinc-400'} cursor-pointer`}>Guardados</li>
+                    </ul>
+                </nav>
+            </section>
             <Outlet/>
         </section>
     </main>;
