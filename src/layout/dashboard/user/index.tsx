@@ -1,3 +1,4 @@
+import './user.css';
 import { Link, Outlet, useNavigate } from "react-router";
 import { UserLayoutProps } from "./user.props";
 import { LuListTodo } from "react-icons/lu";
@@ -17,8 +18,10 @@ const UserLayout: React.FC<UserLayoutProps> = () => {
         logout();
         navigate('/');
     }
-    return <main className="flex min-h-screen min-w-screen">
-        <nav className="flex flex-col justify-between items-center min-h-full w-48 pl-0 pr-0 pt-28 pb-10" style={{boxShadow:'.3em .3em 1em rgba(0,0,0,0.1)'}}>
+    return <main className="user-layout">
+        <nav 
+            className="user-layout__sidebar" 
+            style={{boxShadow:'.3em .3em 1em rgba(0,0,0,0.1)'}}>
             <ul className="flex flex-col gap-4 text-blue-500">
                 <li>Perfil
                     <ul className="flex flex-col mt-2 font-normal text-zinc-500">
@@ -58,7 +61,7 @@ const UserLayout: React.FC<UserLayoutProps> = () => {
             </ul>
             <button onClick={handleLogout} className="px-2 py-1 rounded-lg bg-red-100 text-red-400">Cerrar sesion</button>
         </nav>
-        <section className="flex flex-col flex-1">
+        <section className="flex flex-col flex-1 min-w-0">
             <header className="w-full p-10 bg-white">
                 Bienvenido
             </header>

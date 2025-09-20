@@ -20,8 +20,8 @@ const Applied = () => {
     useEffect(() => {
         handleGetApplications()
     }, [])
-    return <section className="flex flex-col gap-10 w-full h-full bg-slate-100 rounded-lg p-10">
-        <div className="h-full max-h-full">
+    return <section className="flex flex-col gap-10 w-full h-full bg-slate-100 rounded-lg px-4 py-10">
+        <div className="h-full max-h-full w-full overflow-hidden">
             {
                 apps.length > 0 ?
                     <AppsTable apps={apps}/>

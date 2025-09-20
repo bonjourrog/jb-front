@@ -1,0 +1,6 @@
+.user-layout{
+    @apply flex min-h-screen w-screen;
+}
+.user-layout__sidebar{
+    @apply flex flex-col justify-between items-center min-h-full w-48 pl-0 pr-0 pt-28 pb-10 absolute md:relative left-[-20em] md:left-0;
+}
