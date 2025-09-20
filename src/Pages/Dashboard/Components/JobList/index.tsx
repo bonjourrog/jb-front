@@ -23,7 +23,7 @@ const JobList = () => {
         isOpen: false,
         jobId: ''
     });
-    const [filters, setFilters] = useState<Filter>({
+    const [filters, _] = useState<Filter>({
         company_id: decoded.userId,
         contract: '',
         industry: '',

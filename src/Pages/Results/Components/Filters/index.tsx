@@ -1,4 +1,4 @@
-import { Box, Checkbox, FormControlLabel, FormGroup, InputAdornment, MenuItem, Slider, TextField } from '@mui/material';
+import { Box, Checkbox, FormControlLabel, FormGroup, TextField } from '@mui/material';
 import { NumericFormat } from 'react-number-format';
 import './Filters.css';
 import { ChangeEvent, useState } from 'react';

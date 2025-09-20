@@ -12,7 +12,7 @@ import { useJobs } from '../../hooks/useJobs';
 import { Filter } from '../../entity/filter';
 
 const JobListForm: React.FC<NewJobFormProps> = ({ setShowForm, jobData }) => {
-    const [industry, setIndustry] = useState<Industry | ''>('');
+    const [_, setIndustry] = useState<Industry | ''>('');
     const { createJob, updateJob } = useJobs({} as Filter);
     const {
         control,

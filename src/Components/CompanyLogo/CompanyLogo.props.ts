@@ -1,4 +1,4 @@
-import { Job } from "../../../../entity/job";
+import { Job } from "../../entity/job";
 
 export interface CompanyLogoProps{
     color: string;

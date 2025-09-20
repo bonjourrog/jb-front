@@ -1,13 +1,11 @@
-import { Box, Button, InputAdornment, Stack, styled } from "@mui/material";
+import { Box, Button, Stack, styled } from "@mui/material";
 import { ChangeEvent, useState } from "react";
 import DeleteIcon from '@mui/icons-material/Delete';
 import {PhotoOutlined } from "@mui/icons-material";
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import CustomTextField from "../CustomeTextField";
 import { CompanyLogoProps } from "./CompanyLogo.props";
-import { BiBuilding } from "react-icons/bi";
 
-const CompanyLogo:React.FC<CompanyLogoProps> = ({register, errors})=>{
+const CompanyLogo:React.FC<CompanyLogoProps> = ({})=>{
     const [imagePreview, setImagePreview] = useState<string>('');
 
     const handleFileChange = (event: ChangeEvent<HTMLInputElement>
