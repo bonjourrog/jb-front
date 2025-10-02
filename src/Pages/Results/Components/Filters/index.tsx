@@ -1,5 +1,4 @@
-import { Box, Checkbox, FormControlLabel, FormGroup, TextField } from '@mui/material';
-import { NumericFormat } from 'react-number-format';
+import { Checkbox, FormControlLabel, FormGroup, Radio, RadioGroup } from '@mui/material';
 import './Filters.css';
 import { ChangeEvent, useState } from 'react';
 const Filters = () => {
@@ -13,19 +12,20 @@ const Filters = () => {
     return <ul className='filters'>
         <li>
             <strong>Tipo de empleo</strong>
-            <FormGroup
+            <RadioGroup
                 sx={{
                     '& .MuiSvgIcon-root': { color: '#656565' },
                     color: '#494949', pl: 2, fontSize: '.1em',
                 }}>
-                <FormControlLabel control={<Checkbox sx={{p:.5}} size='small' />} label="Medio tiempo" />
-                <FormControlLabel control={<Checkbox sx={{p:.5}} size='small' />} label="Tiempo completo" />
-                <FormControlLabel control={<Checkbox sx={{p:.5}} size='small' />} label="Practicante" />
-                <FormControlLabel control={<Checkbox sx={{p:.5}} size='small' />} label="Temporal" />
-                <FormControlLabel control={<Checkbox sx={{p:.5}} size='small' />} label="Proyecto" />
-            </FormGroup>
+                <FormControlLabel value="medio tiempo" control={<Radio sx={{p:.5}} size='small' />} label="Medio tiempo" />
+                <FormControlLabel value="tiempo completo" control={<Radio sx={{p:.5}} size='small' />} label="Tiempo completo" />
+                <FormControlLabel value="practicante" control={<Radio sx={{p:.5}} size='small' />} label="Practicante" />
+                <FormControlLabel value="temporal" control={<Radio sx={{p:.5}} size='small' />} label="Temporal" />
+                <FormControlLabel value="proyecto" control={<Radio sx={{p:.5}} size='small' />} label="Proyecto" />
+                <FormControlLabel value="" control={<Radio sx={{p:.5}} size='small' />} label="Limpiar" />
+            </RadioGroup>
         </li>
-        <li>
+        {/* <li>
             <strong>Salario</strong>
             <Box sx={{ display: 'flex', gap: '.5em', mt: '.2em' }}>
                 <NumericFormat
@@ -53,7 +53,7 @@ const Filters = () => {
                     label="Máximo"
                 />
             </Box>
-        </li>
+        </li> */}
         <li>
             <strong>Horario</strong>
             <FormGroup
