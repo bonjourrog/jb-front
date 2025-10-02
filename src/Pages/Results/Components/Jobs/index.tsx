@@ -10,14 +10,7 @@ import {jwtDecode as jwt_decode} from 'jwt-decode';
 
 const Jobs = () => {
     const [showDetails, setShowDetails] = useState<boolean>(false);
-    const {job, jobs} = useJobStore();
-    const [filters, setFilters] = useState<Filter>({
-        company_id: '',
-        contract: '',
-        industry: '',
-        schedule: '',
-        search: ''
-    });
+    const {job, jobs, filters, setFilters} = useJobStore();
     const {token} = useAuthStore();
     
 
@@ -32,10 +25,10 @@ const Jobs = () => {
         
         if(token){
             const decoed:any = jwt_decode(token);
-            setFilters(prev => ({
-                ...prev,
+            setFilters({
+                ...filters,
                 user_id: decoed.userId
-            }))
+            })
         }
     }, [token])
     
