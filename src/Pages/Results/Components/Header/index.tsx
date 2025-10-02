@@ -1,13 +1,14 @@
 import './Header.css';
-import { SearchOutlined } from '@mui/icons-material';
+    
 import { TbMessage2 } from "react-icons/tb";
 import { MdOutlineNotifications } from "react-icons/md";
 import { useEffect, useState } from 'react';
-import { BiFilter, BiUser } from 'react-icons/bi';
+import {  BiUser } from 'react-icons/bi';
 import { HiOutlineLogout } from 'react-icons/hi';
 import { IoSettingsOutline } from 'react-icons/io5';
 import { useAuthStore } from '../../../../stores/authStore';
 import { Link, useNavigate } from 'react-router';
+import SearchBox from './Components';
 const Header = () => {
     const [innerWidth, setInnerWidth] = useState<number>(window.innerWidth);
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -34,16 +35,7 @@ const Header = () => {
     }, [])
     return <header className='results-header'>
         <span className='results-header__logo'>Penasco.io</span>
-        <div className='search'>
-            <label htmlFor="searchbox">
-                <SearchOutlined className='search__icon' />
-                <input type="text" placeholder='Buscar empleo' id='searchbox' />
-            </label>
-            <button>Buscar</button>
-            <div className='filters-btn'>
-                <BiFilter />
-            </div>
-        </div>
+        <SearchBox/>
         {isAuthenticated?
         <ul className={`user-menu ${open ? 'bg-white rounded-t-xl' : ''}`}>
 

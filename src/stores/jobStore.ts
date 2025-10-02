@@ -1,27 +1,41 @@
 import { create } from "zustand";
 import { Job } from "../entity/job";
+import { Filter } from "../entity/filter";
 
-interface JobState{
-    jobs:Job[];
+interface JobState {
+    jobs: Job[];
     job: Job;
-    setJob:(job: Job)=>void;
-    setJobs:(jobs:Job[])=>void;
-    updateJobs:(updatedJob:Job)=>void;
+    setJob: (job: Job) => void;
+    setJobs: (jobs: Job[]) => void;
+    updateJobs: (updatedJob: Job) => void;
+    filters: Filter;
+    setFilters: (filters: Filter) => void;
 }
 
-export const useJobStore = create<JobState>(set=>({
-    jobs:[],
-    job:{} as Job,
-    setJob:(job:Job)=>{
-        set({job})
+export const useJobStore = create<JobState>(set => ({
+    jobs: [],
+    job: {} as Job,
+    filters: {
+        search: '',
+        schedule: '',
+        contract: '',
+        industry: '',
+        company_id: '',
+        user_id: ''
     },
-    setJobs:(jobs:Job[])=>{
-        set({jobs})
+    setFilters: (filters: Filter) => {
+        set({ filters })
     },
-    updateJobs:(updatedJob:Job)=>{
-        set((state)=>({
-            jobs: state.jobs.map(job=>
-                job._id===updatedJob._id ?{...job, ...updatedJob}:job
+    setJob: (job: Job) => {
+        set({ job })
+    },
+    setJobs: (jobs: Job[]) => {
+        set({ jobs })
+    },
+    updateJobs: (updatedJob: Job) => {
+        set((state) => ({
+            jobs: state.jobs.map(job =>
+                job._id === updatedJob._id ? { ...job, ...updatedJob } : job
             )
         }))
     }
