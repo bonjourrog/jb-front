@@ -24,3 +24,12 @@ export interface Location {
     type: string;               // always "Point"
     coordinates: number[] // [longitude, latitude]
 }
+
+export interface JobResponse {
+    data: Job[];
+    message: string;
+    page: number;
+    page_size: number;
+    total: number;
+    total_pages: number;
+}
