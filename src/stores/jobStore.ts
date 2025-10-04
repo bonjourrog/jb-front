@@ -1,10 +1,12 @@
 import { create } from "zustand";
-import { Job } from "../entity/job";
+import { Job, Pagination } from "../entity/job";
 import { Filter } from "../entity/filter";
 
 interface JobState {
     jobs: Job[];
     job: Job;
+    pagination: Pagination;
+    setPagination: (pagination: Pagination) => void;
     setJob: (job: Job) => void;
     setJobs: (jobs: Job[]) => void;
     updateJobs: (updatedJob: Job) => void;
@@ -22,6 +24,10 @@ export const useJobStore = create<JobState>(set => ({
         industry: '',
         company_id: '',
         user_id: ''
+    },
+    pagination:{} as Pagination,
+    setPagination: (pagination: Pagination) => {
+        set({ pagination })
     },
     setFilters: (filters: Filter) => {
         set({ filters })
