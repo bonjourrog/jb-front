@@ -25,11 +25,14 @@ export interface Location {
     coordinates: number[] // [longitude, latitude]
 }
 
-export interface JobResponse {
-    data: Job[];
-    message: string;
+export interface Pagination{
     page: number;
     page_size: number;
     total: number;
     total_pages: number;
+}
+
+export interface JobResponse extends Pagination{
+    data: Job[];
+    message: string;
 }
