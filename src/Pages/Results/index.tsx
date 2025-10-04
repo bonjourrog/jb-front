@@ -3,7 +3,6 @@ import { ResultsProps } from "./Results.props";
 import { HiOutlineBriefcase } from "react-icons/hi2";
 import Filters from './Components/Filters';
 import Header from './Components/Header';
-import MapSection from './Components/MapSection';
 import Jobs from './Components/Jobs';
 import { Link } from 'react-router';
 import { useAuthStore } from '../../stores/authStore';
@@ -28,7 +27,7 @@ const Results: React.FC<ResultsProps> = () => {
                 <Filters />
             </aside>
             <section className='results__content'>
-                <MapSection />
+                {/* <MapSection /> */}
                 <Jobs />
             </section>
         </section>
