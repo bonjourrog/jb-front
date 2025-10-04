@@ -1,5 +1,6 @@
 .jobs {
-    @apply relative p-10 max-h-[calc(100dvh-21em)] overflow-hidden;
+    /* @apply relative p-10 max-h-[calc(100dvh-21em)] overflow-hidden border-4; */
+    @apply relative p-10 overflow-hidden;
 }
 
 .list {
