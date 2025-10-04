@@ -5,4 +5,5 @@ export interface Filter{
     industry:string;
     company_id:string;
     user_id?:string;
+    page?:string;
 }
