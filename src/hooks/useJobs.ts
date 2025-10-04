@@ -10,7 +10,7 @@ import { useJobStore } from "../stores/jobStore";
 
 export const useJobs = (filters: Filter) => {
     const { token } = useAuthStore();
-    const {setJobs, updateJobs} = useJobStore();
+    const {setJobs, updateJobs, setPagination} = useJobStore();
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const createJob = async (data: NewJobData): Promise<any> => {
@@ -65,7 +65,8 @@ export const useJobs = (filters: Filter) => {
     useEffect(() => {
         if(Object.keys(filters).length===0)return;
         getJobs(filters).then(response => {
-            const {data} = response;
+            const {data, page, page_size, total, total_pages} = response;
+            setPagination({page, page_size, total, total_pages});
             setJobs(data);
         })
             .catch(e => setError(e.message || 'Error al cargar empleos'))

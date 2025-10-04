@@ -3,7 +3,7 @@ import { Job, JobResponse } from "../entity/job";
 import api from "./api";
 
 export const getJobs = async(filters:Filter)=>{
-    return (await api.get('job', {params:{...filters}})).data as JobResponse;;
+    return (await api.get('job', {params:{...filters}})).data as JobResponse;
 }
 
 export const newJob = async(job:Job, token:string)=>{
