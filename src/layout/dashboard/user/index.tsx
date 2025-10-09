@@ -9,6 +9,7 @@ import { MdOutlineNotificationsNone } from "react-icons/md";
 import { LuSettings } from "react-icons/lu";
 import { useAuthStore } from "../../../stores/authStore";
 import { useState } from "react";
+import { SiReaddotcv } from "react-icons/si";
 
 const UserLayout: React.FC<UserLayoutProps> = () => {
     const [tab, setTab] = useState<string>('applied');
@@ -28,6 +29,13 @@ const UserLayout: React.FC<UserLayoutProps> = () => {
                         <li className="flex items-center gap-2 px-2 py-2 cursor-pointer hover:bg-blue-100 hover:text-blue-500 rounded-lg">
                             <RiAccountCircle2Line />
                             Ver prefil
+                        </li>
+                        <li>
+                            <Link  className="flex items-center gap-2 px-2 py-2 cursor-pointer hover:bg-blue-100 hover:text-blue-500 rounded-lg" to={'/user/curriculum'}>
+
+                                <SiReaddotcv />
+                                Curriculum
+                            </Link>
                         </li>
                         <li>
                             <Link  className="flex items-center gap-2 px-2 py-2 cursor-pointer hover:bg-blue-100 hover:text-blue-500 rounded-lg" to={'/user/applied'}>
