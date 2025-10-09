@@ -1,17 +1,21 @@
+import { Check, Close } from "@mui/icons-material";
 import { styled, Switch, SwitchProps } from "@mui/material";
 
 const SwitchComponent = styled((props: SwitchProps) => (
-    <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
+    <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} checkedIcon={<Check sx={{ width: 32, height: 32 }} className="p-2 rounded-full bg-white text-green-500" />} icon={<Close sx={{ width: 32, height: 32 }} className="p-2 rounded-full bg-white text-zinc-300" />} />
+
 ))(({ theme }) => ({
     width: '100%',
-    height: 30,
+    height: 40,
     padding: 0,
     '& .MuiSwitch-switchBase': {
         padding: 0,
-        margin: 3,
+        // margin: 4,
+        width:40,
+        height:40,
         transitionDuration: '300ms',
         '&.Mui-checked': {
-            transform: 'translateX(70px)',
+            transform: 'translateX(60px)',
             color: '#fff',
             '& + .MuiSwitch-track': {
                 backgroundColor: '#65C466',
@@ -44,11 +48,11 @@ const SwitchComponent = styled((props: SwitchProps) => (
     },
     '& .MuiSwitch-thumb': {
         boxSizing: 'border-box',
-        width: 24,
-        height: 24,
+        width:32,
+        height:32,
     },
     '& .MuiSwitch-track': {
-        borderRadius: 26 / 2,
+        borderRadius: 50 / 2,
         backgroundColor: '#E9E9EA',
         opacity: 1,
         transition: theme.transitions.create(['background-color'], {
