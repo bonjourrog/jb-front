@@ -11,4 +11,5 @@ export const jobSchema = z.object({
     "industry":z.enum(industries, {message:'seleccione una industria'}),
     "schedule":z.enum(schedules),
     "contract_type":z.enum(contractTypes),
+    "published":z.boolean().optional().default(false)
 })
