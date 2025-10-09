@@ -56,7 +56,7 @@ const JobList = () => {
     }
 
     
-    return <section className='p-10'>
+    return <section className='p-0 md:p-10'>
         <div className={`absolute w-full h-full ${showForm ? 'top-1/2' : '-top-full'} left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 bg-zinc-700/35`}>
             <JobListForm setShowForm={setShowForm} jobData={jobSelected}/>
         </div>
@@ -66,8 +66,8 @@ const JobList = () => {
                     <tr>
                         <th></th>
                         <th>Puesto</th>
-                        <th>Salario</th>
-                        <th>Beneficios</th>
+                        <th className='hidden md:table-cell'>Salario</th>
+                        <th className='hidden lg:table-cell'>Beneficios</th>
                         <th>Publicado</th>
                     </tr>
                 </thead>
@@ -89,19 +89,19 @@ const JobList = () => {
                             <td className='editable'>
                                 <strong>{job.title}</strong>
                             </td>
-                            <td className='editable'>
+                            <td className='editable hidden md:table-cell'>
                                 <p className='text-zinc-500'>
                                     {Math.trunc(job.salary).toLocaleString('en-US', { style: 'currency', currency: 'usd', minimumFractionDigits: 0 })}
                                 </p>
                             </td>
-                            <td className='editable'>
+                            <td className='editable hidden lg:table-cell'>
                                 <div className='flex gap-2'>
                                     {job.benefits.map(benefit => (
                                         <p key={benefit} className='px-2 py-1 text-xs text-emerald-600 bg-emerald-200 rounded-sm'>{benefit}</p>
                                     ))}
                                 </div>
                             </td>
-                            <td className='editable'>
+                            <td className='editable w-10'>
                                 <FormGroup>
                                     <FormControlLabel
                                         control={<SwitchComponent sx={{ m: 1 }} checked={job.published} onChange={(e)=>{handleToggle(e, job._id)}}/>}

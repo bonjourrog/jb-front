@@ -1,6 +1,9 @@
 .dashboard {
-    /* @apply w-screen h-screen flex bg-[#1d1c22]; */
-    @apply w-screen h-screen flex bg-white border-l-2;
+    @apply relative w-screen h-screen flex bg-white border-l-2;
+}
+
+.dashboard__sidebar--div {
+    @apply w-52 fixed lg:static top-0 left-0 h-full z-40 transform -translate-x-full peer-checked:translate-x-0 transition-transform duration-300 lg:translate-x-0 flex-shrink-0 bg-white;
 }
 
 .dashboard__content {

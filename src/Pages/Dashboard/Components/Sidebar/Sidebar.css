@@ -1,5 +1,5 @@
 .dashboard-sidebar {
-    @apply h-screen w-72;
+    @apply relative h-full w-full;
 }
 
 .dashboard-sidebar>ul {
