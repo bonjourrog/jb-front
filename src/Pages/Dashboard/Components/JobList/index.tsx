@@ -11,6 +11,7 @@ import { Delete, Edit, MoreVert } from '@mui/icons-material';
 import { Job } from '../../../../entity/job';
 import { useJobStore } from '../../../../stores/jobStore';
 import SwitchComponent from './Components/SwitchComponent';
+import { NewJobData } from '../../../../types/job';
 
 const JobList = () => {
     const { token } = useAuthStore();
@@ -30,8 +31,9 @@ const JobList = () => {
         schedule: '',
         search: ''
     });
-    const {deleteJob} = useJobs(filters);
-    const  {jobs, setJobs} = useJobStore();
+    const {deleteJob, updateJob} = useJobs(filters);
+    const jobs = useJobStore(state => state.jobs);
+    const setJobs = useJobStore(state => state.setJobs);
 
     const handleJobDelete = async()=>{
         const _jobSelected:Job = jobs.filter(j=>j._id === menuState.jobId)[0] as Job;
@@ -39,6 +41,18 @@ const JobList = () => {
         await deleteJob(_jobSelected._id)
         const newJobs:Job[] = jobs.filter(j=>j._id!==_jobSelected._id)
         setJobs(newJobs);
+    }
+    const handleToggle = async (event: React.ChangeEvent<HTMLInputElement>, job_id: string) => {
+        const newJobs = jobs.map(job => {
+            if (job._id === job_id) {
+                return { ...job, published: event.target.checked };
+            }
+            return job;
+        });
+        setJobs(newJobs);
+        const job:Job = jobs.filter(j => j._id === job_id)[0];
+        const JobToUpdate: NewJobData = {...job, published: event.target.checked, salary: `${job.salary}`};
+        await updateJob(JobToUpdate);
     }
 
     
@@ -54,8 +68,6 @@ const JobList = () => {
                         <th>Puesto</th>
                         <th>Salario</th>
                         <th>Beneficios</th>
-                        <th>Descripción</th>
-                        <th>Descripción corta</th>
                         <th>Publicado</th>
                     </tr>
                 </thead>
@@ -89,16 +101,10 @@ const JobList = () => {
                                     ))}
                                 </div>
                             </td>
-                            <td className='editable max-w-96 text-gray-400 text-sm font-bold'>
-                                {job.description.length > 30 ? `${job.description.substring(0, 30)}...` : job.description}
-                            </td>
-                            <td className='editable max-w-96 text-zinc-400 text-sm font-bold'>
-                                {job.short_description.length > 30 ? `${job.short_description.substring(0, 30)}...` : job.short_description}
-                            </td>
                             <td className='editable'>
                                 <FormGroup>
                                     <FormControlLabel
-                                        control={<SwitchComponent sx={{ m: 1 }} checked={job.published} />}
+                                        control={<SwitchComponent sx={{ m: 1 }} checked={job.published} onChange={(e)=>{handleToggle(e, job._id)}}/>}
                                         label=""
                                     />
                                     {job.published}
