@@ -10,6 +10,7 @@ import Welcome from "../Dashboard/Components/Welcome";
 import JobList from "../Dashboard/Components/JobList";
 import Applied from "../Applied";
 import UserLayout from "../../layout/dashboard/user";
+import Curriculum from "../Curriculum";
 
 const AppRoutes = () => {
     let routes = useRoutes([
@@ -21,7 +22,7 @@ const AppRoutes = () => {
             element: <ProtectedRoute allowedRoles={['company']}><Dashboard /></ProtectedRoute>,
             children:[
                 {index: true, element:<Welcome/>},
-                {path:'job-list', element:<JobList/>}
+                {path:'job-list', element:<JobList/>},
             ]
         },
         {path: '/user',
@@ -29,6 +30,7 @@ const AppRoutes = () => {
             children:[
                 {index: true, element:<p>Bienvenido</p>},
                 {path:'applied', element:<Applied/>},
+                {path:'curriculum', element:<Curriculum/>},
             ]
         },
         { path: '/unauthorized', element: <UnauthorizedPage /> },
