@@ -4,11 +4,13 @@ import { toast } from "react-toastify";
 import { useAuthStore } from "../stores/authStore";
 import { applyJob as applyJobService } from "../service/application";
 import { useJobStore } from "../stores/jobStore";
+import { useNavigate } from "react-router";
 
 export const useUserApplication = () => {
     const { token } = useAuthStore();
     const {jobs, setJobs} = useJobStore()
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const navigate = useNavigate();
     const getApplication = async () => {
         setIsLoading(true);
         try {
@@ -51,6 +53,11 @@ export const useUserApplication = () => {
                 errorMsg = 'El empleo no existe';
             } else if (apiError.includes('token')) {
                 errorMsg = 'Sesión expirada, inicia sesión de nuevo';
+            }else if(apiError.includes('user need to create a cv')){
+                errorMsg = 'Necesitas crear un CV antes de postularte';
+                toast.error(errorMsg);
+                navigate('/user/curriculum');
+                return;
             }
             toast.error(errorMsg);
         }
