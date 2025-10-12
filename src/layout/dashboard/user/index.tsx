@@ -73,14 +73,14 @@ const UserLayout: React.FC<UserLayoutProps> = () => {
             <header className="w-full p-10 bg-white">
                 Bienvenido
             </header>
-            <section className="pt-10 pl-10 bg-slate-100">
+            {/* <section className="pt-10 pl-10 bg-slate-100">
                 <nav>
                     <ul className="flex gap-10">
                         <li onClick={()=>setTab('applied')} className={`border-b-2 ${tab==='applied'?'border-blue-400':'text-zinc-400'} cursor-pointer`}>postulaciones</li>
                         <li onClick={()=>setTab('saved')} className={`border-b-2 ${tab==='saved'?'border-green-400':'text-zinc-400'} cursor-pointer`}>Guardados</li>
                     </ul>
                 </nav>
-            </section>
+            </section> */}
             <Outlet/>
         </section>
     </main>;
