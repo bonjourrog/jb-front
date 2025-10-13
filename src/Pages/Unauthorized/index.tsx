@@ -1,4 +1,5 @@
 import { ArrowLeft, Home, Lock } from '@mui/icons-material';
+import { Link } from 'react-router';
 // import { Lock, ArrowLeft, Home } from 'lucide-react';
 
 export default function UnauthorizedPage() {
@@ -39,10 +40,12 @@ export default function UnauthorizedPage() {
                         Go to Homepage
                     </button>
 
-                    <button className="w-full bg-white hover:bg-gray-50 text-gray-700 font-medium py-3 px-6 rounded-lg border border-gray-300 transition-colors duration-200">
-                        <ArrowLeft className="w-4 h-4 inline mr-2" />
-                        Go Back
-                    </button>
+                    <Link to={'/'} className='block w-full h-full'>
+                        <button className="w-full bg-white hover:bg-gray-50 text-gray-700 font-medium py-3 px-6 rounded-lg border border-gray-300 transition-colors duration-200">
+                            <ArrowLeft className="w-4 h-4 inline mr-2" />
+                            Go Back
+                        </button>
+                    </Link>
                 </div>
 
                 {/* Footer */}
