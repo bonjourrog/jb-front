@@ -13,10 +13,10 @@ const Results: React.FC<ResultsProps> = () => {
         <Header />
         <section className='flex h-screen overflow-y-auto'>
             <aside className='left-bar'>
-                <section className='flex flex-col items-center justify-center gap-4 w-full h-60 bg-white rounded-3xl'>
+                <section className='flex flex-col items-center justify-center gap-4 w-full h-60 py-5 bg-white rounded-3xl'>
                     {isAuthenticated ? <>
-                        <div className='w-20 h-20 rounded-full bg-gray-200'></div>
-                        <strong className="text-zinc-700">Rogelio Beltran</strong>
+                        <div className='w-20 h-20 rounded-full bg-blue-100'></div>
+                        <strong className="text-zinc-700">Bienvenido</strong>
                         <Link to={'/user/applied'} className="flex gap-2 items-center text-gray-600 border-t pt-2 text-sm">
                             <HiOutlineBriefcase />
                             ver publicaciones
