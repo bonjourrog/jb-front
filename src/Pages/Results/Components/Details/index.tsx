@@ -68,7 +68,7 @@ const Details: React.FC<DetailsProps> = ({ showDetails, setShowDetails, job }) =
                     }
                 </ul>
                 <HTMLContent html={job.description} />
-                <WhatsAppButton phoneNumber={`${job.company_phone}`} message={`Quisiera mas informacion sobre el puesto de ${job.title}`} fullWidth={false}/>
+                <WhatsAppButton phoneNumber={`${job.company_phone}`} message={`Hola, vengo de penasco.io y quiero aplicar al puesto de ${job.title}`} fullWidth={false}/>
             </ul> : <div>
                 Seleccione un trabajo
             </div>}
