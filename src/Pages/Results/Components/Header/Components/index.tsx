@@ -1,4 +1,4 @@
-import './SearchBox.css';
+import './Searchbox.css';
 import { SearchOutlined } from '@mui/icons-material';
 import { BiFilter } from 'react-icons/bi';
 import { useJobStore } from '../../../../../stores/jobStore';
