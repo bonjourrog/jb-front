@@ -16,6 +16,7 @@ export interface Job {
     company_id: string;
     company_name?:string;
     company_logo?:string;
+    company_phone?:string;
     color?:string;
     created_at: Date;
     updated_at: Date;
