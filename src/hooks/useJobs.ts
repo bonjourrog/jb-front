@@ -10,7 +10,10 @@ import { useJobStore } from "../stores/jobStore";
 
 export const useJobs = (filters: Filter) => {
     const { token } = useAuthStore();
-    const {setJobs, updateJobs, setPagination} = useJobStore();
+    const setPagination =  useJobStore(state=>state.setPagination);
+    const updateJobs = useJobStore(state=>state.updateJobs);
+    const jobs = useJobStore(state=>state.jobs)
+    const setJobs = useJobStore(state=>state.setJobs);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const createJob = async (data: NewJobData): Promise<any> => {
@@ -23,6 +26,7 @@ export const useJobs = (filters: Filter) => {
             const userId: string = decoded.userId;
             const _newJob: Partial<Job> = { ...data, salary: Number(data.salary), company_id: userId }
             const response = await newJob(_newJob as Job, token)
+            setJobs([...jobs, response.data])
             toast.success("Empleo creado correctamente");
             return response;
         } catch (error: any) {
@@ -56,13 +60,11 @@ export const useJobs = (filters: Filter) => {
             toast.success('empleo eliminado correctamente')
             return response
         } catch (error:any) {
-            console.log(error);
-            
             toast.error(error?.response?.data?.error || 'Error al eliminar el empleo');
         }
     }
 
-    useEffect(() => {
+    const getAllJobs = async()=>{
         if(Object.keys(filters).length===0)return;
         getJobs(filters).then(response => {
             const {data, page, page_size, total, total_pages} = response;
@@ -71,7 +73,11 @@ export const useJobs = (filters: Filter) => {
         })
             .catch(e => setError(e.message || 'Error al cargar empleos'))
             .finally(() => setIsLoading(false));
+    }
+
+    useEffect(() => {
+        getAllJobs()
     }, [filters]);
 
-    return {createJob, updateJob, deleteJob, isLoading, error}
+    return {createJob, updateJob, deleteJob, getAllJobs, isLoading, error}
 }

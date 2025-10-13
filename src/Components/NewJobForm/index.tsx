@@ -46,8 +46,6 @@ const JobListForm: React.FC<NewJobFormProps> = ({ setShowForm, jobData }) => {
         }
     };
     useEffect(() => {
-        console.log(jobData);
-        
         reset({
             title: jobData?.title ?? '',
             short_description: jobData?.short_description ?? '',
