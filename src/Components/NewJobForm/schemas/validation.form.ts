@@ -1,15 +1,29 @@
-import {z} from 'zod';
+import { z } from 'zod';
 import { contractTypes, industries, schedules } from '../../../types/job';
 export const jobSchema = z.object({
-    "title":z.string().min(5, {message:'El titulo es muy corto'}).max(100, {message:'El titulo es muy largo'}),
-    "short_description":z.string().min(17, {message:'El tiene que ser muy corta'}).max(250, {message:'El descripcion es muy larga'}),
-    "description":z.string().min(17).max(2500),
-    "salary":z.string().min(1, {message:'Este campo es obligatorio'}),
+    "title": z.string().min(5, { message: 'El titulo es muy corto' }).max(100, { message: 'El titulo es muy largo' }),
+    "short_description": z.string().min(17, { message: 'La descripcion es muy corta' }).max(250, { message: 'El descripcion es muy larga' }),
+    "description": z
+        .string()
+        .refine(
+            (val) => {
+                const text = val.replace(/<[^>]*>/g, '').trim();
+                return text.length > 0 && text.length <= 40000;
+            },
+            (val) => {
+                const text = val.replace(/<[^>]*>/g, '').trim();
+                if (text.length === 0) {
+                    return { message: "La descripción no puede estar vacía" };
+                }
+                return { message: "La descripción es muy larga (máximo 4000 caracteres)" };
+            }
+        ),
+    "salary": z.string().min(1, { message: 'Este campo es obligatorio' }),
     "benefits": z.array(z.string())
-        .min(1, {message:'debe de agregar al menos un benefocio'})
-        .max(5,{message:'solo puede agregar 5 beneficios, si necesita mas agregelos en la descriocion'}),
-    "industry":z.enum(industries, {message:'seleccione una industria'}),
-    "schedule":z.enum(schedules),
-    "contract_type":z.enum(contractTypes),
-    "published":z.boolean()
+        .min(1, { message: 'debe de agregar al menos un benefocio' })
+        .max(5, { message: 'solo puede agregar 5 beneficios, si necesita mas agregelos en la descriocion' }),
+    "industry": z.enum(industries, { message: 'seleccione una industria' }),
+    "schedule": z.enum(schedules),
+    "contract_type": z.enum(contractTypes),
+    "published": z.boolean()
 })
