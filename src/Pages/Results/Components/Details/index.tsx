@@ -57,7 +57,7 @@ const Details: React.FC<DetailsProps> = ({ showDetails, setShowDetails, job }) =
                         </ul>
                     </div>
                 </div>
-                <button onClick={handleApplyJob} className='px-3 py-1 rounded-full bg-[#777CE4] font-bold  text-white'>Postular</button>
+                {/* <button onClick={handleApplyJob} className='px-3 py-1 rounded-full bg-[#777CE4] font-bold  text-white'>Postular</button> */}
                 <ul className='flex gap-2'>
                     {
                         job.benefits ? job.benefits.map(benefit => (
