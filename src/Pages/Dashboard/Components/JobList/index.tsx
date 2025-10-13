@@ -33,7 +33,7 @@ const JobList = () => {
     });
     const { deleteJob, updateJob } = useJobs(filters);
     const jobs = useJobStore(state => state.jobs);
-    console.log(jobs);
+    console.log('jobs');
 
     const setJobs = useJobStore(state => state.setJobs);
 
