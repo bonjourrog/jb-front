@@ -1,5 +1,5 @@
 .details {
-    @apply absolute w-[55%] h-[28.7em] border-4 border-indigo-200 bg-white rounded-l-xl transition-all duration-500 ease-in-out;
+    @apply absolute w-[55%] h-[calc(100%-10em)] border-4 border-indigo-200 bg-white rounded-l-xl transition-all duration-500 ease-in-out overflow-scroll;
 }
 
 .details__return-btn {

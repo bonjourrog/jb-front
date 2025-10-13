@@ -6,7 +6,7 @@ import Details from '../Details';
 import JobCard from '../../../../Components/JobCard';
 import { useAuthStore } from '../../../../stores/authStore';
 import { jwtDecode as jwt_decode } from 'jwt-decode';
-import { Pagination, Stack } from '@mui/material';
+import { Box, Pagination, Stack } from '@mui/material';
 
 const Jobs = () => {
     const [showDetails, setShowDetails] = useState<boolean>(false);
@@ -65,10 +65,8 @@ const Jobs = () => {
                 </div>
             }
         </ul>
-        <Stack sx={{ alignItems: 'center', width: '100%', marginTop: '1rem' }}>
-            <Pagination 
-            
-            onChange={handlePageChange} count={pagination.total_pages} variant="outlined" color="primary" shape="rounded" />
+        <Stack sx={{ alignItems: 'center', width: '100%', marginTop: 4}}>
+            <Pagination onChange={handlePageChange} count={pagination.total_pages} variant="outlined" color="primary" shape="rounded" />
         </Stack>
     </section>
 }
