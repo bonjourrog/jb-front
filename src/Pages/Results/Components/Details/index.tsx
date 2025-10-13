@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useUserApplication } from '../../../../hooks/useUserApplication';
 import HTMLContent from '../../../../Components/HTMLContent/inde';
+import WhatsAppButton from '../../../../Components/WhatsappButton';
 
 const Details: React.FC<DetailsProps> = ({ showDetails, setShowDetails, job }) => {
     const { applyJob } = useUserApplication()
@@ -34,7 +35,7 @@ const Details: React.FC<DetailsProps> = ({ showDetails, setShowDetails, job }) =
             Regresar
         </button>
         <div>
-            {job ? <ul className='flex flex-col items-start gap-4 p-4'>
+            {job ? <ul className='flex flex-col items-start gap-4 p-4 relative'>
                 <div className='flex gap-4'>
                     <CompanyLogo color={`${job.color}`} job={job} />
                     <div className='flex flex-col gap-1'>
@@ -65,7 +66,7 @@ const Details: React.FC<DetailsProps> = ({ showDetails, setShowDetails, job }) =
                     }
                 </ul>
                 <HTMLContent html={job.description} />
-                {/* <p>{job.description}</p> */}
+                <WhatsAppButton phoneNumber={`${job.company_phone}`} message={`Quisiera mas informacion sobre el puesto de ${job.title}`} fullWidth={false}/>
             </ul> : <div>
                 Seleccione un trabajo
             </div>}
