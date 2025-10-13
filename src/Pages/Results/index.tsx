@@ -14,7 +14,6 @@ const Results: React.FC<ResultsProps> = () => {
         <section className='flex h-screen overflow-y-auto'>
             <aside className='left-bar'>
                 <section className='flex flex-col items-center justify-center gap-4 w-full h-60 bg-white rounded-3xl'>
-
                     {isAuthenticated ? <>
                         <div className='w-20 h-20 rounded-full bg-gray-200'></div>
                         <strong className="text-zinc-700">Rogelio Beltran</strong>
