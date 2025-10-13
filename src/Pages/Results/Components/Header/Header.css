@@ -44,6 +44,10 @@
     .results-header__logo{
         @apply hidden;
     }
+    .user-menu{
+        justify-content: end;
+        width: 13em;
+    }
 }
 @media screen and (max-width:800px) {
     .results-header{
