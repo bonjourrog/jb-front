@@ -3,13 +3,15 @@ import { Controller, useForm } from "react-hook-form";
 import { contractTypes, industries, Industry, NewJobData, schedules } from "../../types/job";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { jobSchema } from "./schemas/validation.form";
-import { Autocomplete, Box, Button, Chip, InputAdornment, MenuItem, Select, Stack, Typography } from "@mui/material";
+import { Autocomplete, Box, Button, Chip, FormHelperText, InputAdornment, MenuItem, Select, Stack, Typography } from "@mui/material";
 import CustomTextField from "../../Pages/Signup/Components/CustomeTextField";
 import { AttachMoney, Description, ListAlt, Storefront, Title } from "@mui/icons-material";
 import React, { useEffect, useState } from "react";
 import { NewJobFormProps } from './newJobForm.props';
 import { useJobs } from '../../hooks/useJobs';
 import { Filter } from '../../entity/filter';
+import RichTextfield from '../RichTextfield';
+import { toast } from 'react-toastify';
 
 const JobListForm: React.FC<NewJobFormProps> = ({ setShowForm, jobData }) => {
     const [_, setIndustry] = useState<Industry | ''>('');
@@ -26,39 +28,43 @@ const JobListForm: React.FC<NewJobFormProps> = ({ setShowForm, jobData }) => {
             title: '',
             short_description: '',
             description: '',
-            salary: '',
+            salary: '3000',
             benefits: [],
             industry: industries[0],
             schedule: schedules[0],
             contract_type: contractTypes[0],
+            published: false
         },
     });
 
     const onSubmit = async (data: NewJobData) => {
         try {
-            !jobData ? createJob(data) : updateJob({...jobData, ...data});
+            !jobData ? createJob(data) : updateJob({ ...jobData, ...data });
             setShowForm(false)
         } catch (error) {
-
+            toast.error('Algo salio mal, por favor verifica la información o recarga la página')
         }
     };
-
     useEffect(() => {
+        console.log(jobData);
+        
         reset({
             title: jobData?.title ?? '',
             short_description: jobData?.short_description ?? '',
             description: jobData?.description ?? '',
-            salary: String(jobData?.salary) ?? '',
+            salary: String(jobData?.salary ?? 3000),
             benefits: jobData?.benefits ?? [],
             industry: jobData?.industry ?? industries[0],
             schedule: jobData?.schedule ?? schedules[0],
             contract_type: jobData?.contract_type ?? contractTypes[0],
+            published: jobData?.published ?? false,
         })
     }, [jobData, reset])
 
     return <Box component="form" onSubmit={handleSubmit(onSubmit)} className='new-job-form'>
         <Stack spacing={2} sx={{
             width: '100%',
+            // height: 'auto',
             px: {
                 md: '3em'
             },
@@ -109,30 +115,23 @@ const JobListForm: React.FC<NewJobFormProps> = ({ setShowForm, jobData }) => {
                 />
                 <Stack sx={{
                     display: 'flex',
-                    flexDirection: {
-                        xs: 'column',
-                        sm: 'row'
-                    },
+                    flexDirection: 'column',
                     justifyContent: 'space-between',
                     gap: '1em'
                 }}>
-                    <CustomTextField
-                        slotProps={{
-                            input: {
-                                startAdornment: (
-                                    <InputAdornment position="start">
-                                        <Description sx={{ color: '#ababab' }} />
-                                    </InputAdornment>
-                                )
-                            }
-                        }}
-                        multiline
-                        rows={3}
-                        label="Descripcion larga"
-                        fullWidth
-                        {...register("description")}
-                        error={!!errors.description}
-                        helperText={errors.description?.message}
+                    <Controller
+                        name="description"
+                        control={control}
+                        render={({ field }) => (
+                            <Box>
+                                <RichTextfield value={field.value} onChange={field.onChange} error={!!errors.description} />
+                                {errors.description && (
+                                    <FormHelperText error sx={{ ml: 2, mt: 0.5 }}>
+                                        {errors.description.message}
+                                    </FormHelperText>
+                                )}
+                            </Box>
+                        )}
                     />
                     <CustomTextField
                         slotProps={{
@@ -164,18 +163,21 @@ const JobListForm: React.FC<NewJobFormProps> = ({ setShowForm, jobData }) => {
                             value={field.value ?? []}
                             onChange={(_, newValue) => field.onChange(newValue)}
                             renderValue={(value: readonly string[], getTagProps) =>
-                                value.map((option: string, index: number) => (
-                                    <Chip
+                                value.map((option: string, index: number) => {
+                                    const { key, ...tagProps } = getTagProps({ index });
+                                    return <Chip
+                                        key={key}
                                         variant="outlined"
                                         label={option}
-                                        {...getTagProps({ index })}
+                                        {...tagProps}
                                     />
-                                ))
+
+                                })
                             }
                             renderInput={(params: any) => (
                                 <CustomTextField
                                     {...params}
-                                    InputProps={{
+                                    slotProps={{
                                         ...params.InputProps,
                                         startAdornment: (
                                             <>
