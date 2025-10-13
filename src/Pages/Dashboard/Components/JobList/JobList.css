@@ -5,6 +5,19 @@
 .new-job-btn{
     @apply flex  items-center justify-center gap-2 w-full p-2 text-center border-2 border-dashed border-gray-300 text-gray-300 cursor-pointer hover:border-solid hover:bg-indigo-500 hover:border-indigo-500 hover:text-white hover:rounded-md hover:translate-y-2 hover:py-4 hover:shadow-lg transition-all duration-300;
 }
+.job-list-form-container{
+    @apply absolute w-[calc(100%-200px)] h-full top-1/2 right-0 -translate-y-1/2 z-20 bg-zinc-700/35;
+}
+@media screen and (max-width:1023px){
+    .job-list-form-container{
+        @apply w-full h-dvh left-1/2 right-auto -translate-x-1/2;
+    }
+}
+@media screen and (max-width:800px) {
+    .job-list-form-container{
+        @apply h-dvh top-0 transform-none left-0;
+    }
+}
 
 /* .new-job-btn::after {
     content: "";

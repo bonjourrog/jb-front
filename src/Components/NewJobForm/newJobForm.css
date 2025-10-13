@@ -1,11 +1,12 @@
 .new-job-form{
-    max-height: 90vh;
+    max-height: 90%;
     height: auto;
     overflow: scroll;
     @apply absolute top-1/2 left-1/2 mx-auto p-8 -translate-x-1/2 -translate-y-1/2 w-[45em] rounded-lg bg-white z-20;
 }
 @media screen and (max-width:800px) {
     .new-job-form{
+        max-height: 100%;
         @apply w-full h-full;
     }
 }

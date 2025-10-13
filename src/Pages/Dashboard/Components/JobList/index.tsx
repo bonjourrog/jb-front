@@ -61,7 +61,7 @@ const JobList = () => {
     return <section className='p-0 md:p-10'>
         {
             showForm ?
-                <div className={`absolute w-full h-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 bg-zinc-700/35`}>
+                <div className={`job-list-form-container`}>
                     <JobListForm setShowForm={setShowForm} jobData={jobSelected} />
                 </div>
                 : undefined
