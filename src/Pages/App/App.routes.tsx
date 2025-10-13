@@ -6,7 +6,7 @@ import Results from "../Results";
 import Dashboard from "../Dashboard";
 import UnauthorizedPage from "../Unauthorized";
 import { ProtectedRoute } from "./ProtectedRoutes";
-// import Welcome from "../Dashboard/Components/Welcome";
+import Welcome from "../Dashboard/Components/Welcome";
 import JobList from "../Dashboard/Components/JobList";
 import Applied from "../Applied";
 import UserLayout from "../../layout/dashboard/user";
@@ -21,9 +21,8 @@ const AppRoutes = () => {
         { path: '/dashboard', 
             element: <ProtectedRoute allowedRoles={['company']}><Dashboard /></ProtectedRoute>,
             children:[
-                // {index: true, element:<Welcome/>},
-                {index: true, element:<JobList/>},
-                // {path:'job-list', element:<JobList/>},
+                {index: true, element:<Welcome/>},
+                {path:'job-list', element:<JobList/>},
             ]
         },
         {path: '/user',
