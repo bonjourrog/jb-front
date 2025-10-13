@@ -7,7 +7,6 @@ const RichTextfield: React.FC<{
     value: string,
     onChange: (value: string) => void, error?: boolean;
 }> = ({ value, onChange, error }) => {
-    console.log(value);
     const rteRef = useRef<RichTextEditorRef>(null);
     useEffect(() => {
         const editor = rteRef.current?.editor;

@@ -29,7 +29,7 @@ const JobCard: React.FC<JobCardProps> = ({ job, color, setShowDetails, className
             </ul>
             <strong>{job.title}</strong>
             <p className='job__date'>{new Date(job.created_at).toDateString()}</p>
-            <p className='job__short-desc'>{job.short_description}</p>
+            <p className='job__short-desc'>{job.short_description.length>78?`${job.short_description.substring(0,78)}...`:job.short_description}</p>
             <ul className='job__details'>
                 <li>{job.contract_type}</li>
                 <li className='job__detail'>
