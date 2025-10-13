@@ -4,31 +4,33 @@ import { DetailsProps } from "./Details.props";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { HiCash } from 'react-icons/hi';
 import CompanyLogo from '../CompanyLogo';
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router';
-import { useUserApplication } from '../../../../hooks/useUserApplication';
+// UNCOMMENT THIS WHEN SYSTEM ADMIT APPLY FUNCTIONALITY
+// import { useEffect, useState } from 'react';
+// import { useNavigate } from 'react-router';
+// import { useUserApplication } from '../../../../hooks/useUserApplication';
 import HTMLContent from '../../../../Components/HTMLContent/inde';
 import WhatsAppButton from '../../../../Components/WhatsappButton';
 
 const Details: React.FC<DetailsProps> = ({ showDetails, setShowDetails, job }) => {
-    const { applyJob } = useUserApplication()
-    const [userisLogged, setUserisLogged] = useState<boolean>(false);
-    const navigate = useNavigate();
-    const token: string | null = localStorage.getItem('token');
-    useEffect(() => {
-        if (token) setUserisLogged(true);
-        else setUserisLogged(false);
-    }, [token])
+    // UNCOMMENT THIS WHEN SYSTEM ADMIT APPLY FUNCTIONALITY
+    // const { applyJob } = useUserApplication()
+    // const [userisLogged, setUserisLogged] = useState<boolean>(false);
+    // const navigate = useNavigate();
+    // const token: string | null = localStorage.getItem('token');
+    // useEffect(() => {
+    //     if (token) setUserisLogged(true);
+    //     else setUserisLogged(false);
+    // }, [token])
 
-    const handleApplyJob = async () => {
-        if (!userisLogged) {
-            navigate('/login');
-            return;
-        }
-        if (job) {
-            await applyJob(job._id);
-        }
-    }
+    // const handleApplyJob = async () => {
+    //     if (!userisLogged) {
+    //         navigate('/login');
+    //         return;
+    //     }
+    //     if (job) {
+    //         await applyJob(job._id);
+    //     }
+    // }
     return <div className={`details ${showDetails ? 'details--hide' : 'details--show'}`}>
         <button onClick={() => setShowDetails(!showDetails)} className='details__return-btn'>
             <FaArrowLeftLong />

@@ -1,21 +1,14 @@
 import { RadioGroup } from '@mui/material';
 import './Filters.css';
-import { ChangeEvent, Dispatch, FC, SetStateAction, useState } from 'react';
+import { ChangeEvent, Dispatch, FC, SetStateAction } from 'react';
 import { useJobStore } from '../../../../stores/jobStore';
 import RadioPill from '../../../../Components/RadioPill';
 const Filters:FC<{setShowFilters?:Dispatch<SetStateAction<boolean>>}> = ({setShowFilters}) => {
-    const [salary, setSalary] = useState<{ min: string, max: string }>({
-        min: '',
-        max: ''
-    })
     const JobType:string[] = ['Medio tiempo', 'Tiempo completo', 'Practicante', 'Temporal', 'Proyecto', 'Limpiar']
     const jobSchedule: string[] = ['Nocturno', 'Vespertino', 'Matutino', 'Rotativo', 'Limpiar']
     const filters = useJobStore(state => state.filters);
     const setFilters = useJobStore(state => state.setFilters);
 
-    const handleSalarychange = (event: ChangeEvent<HTMLInputElement>) => {
-        setSalary({ ...salary, [event.target.name]: event.target.value });
-    }
     const handleContractChange = (event: ChangeEvent<HTMLInputElement>) => {
         setFilters({
             ...filters,

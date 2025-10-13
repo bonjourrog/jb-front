@@ -9,9 +9,6 @@ const StyledField = styled((props: TextFieldProps) => (
     ))(({ theme }) => ({
         '& .MuiOutlinedInput-root': {
             '& fieldset': {
-                // border:"none",
-                // borderBottom:".1em solid",
-                // borderColor: '#e0e0e0',
                 borderColor: 'transparent',
                 borderRadius: '.5em',
                 '&:hover': { borderColor: '#c9c9c9' },
@@ -32,13 +29,13 @@ const StyledField = styled((props: TextFieldProps) => (
 
 export default function Curriculum() {
     const {
-        control,
+        // control,
         register,
-        reset,
+        // reset,
         handleSubmit,
         watch,
-        setValue,
-        formState: { errors },
+        // setValue,
+        // formState: { errors },
     } = useForm<z.infer<typeof curriculumSchema>>({
         resolver: zodResolver(curriculumSchema),
         defaultValues: {
@@ -47,7 +44,7 @@ export default function Curriculum() {
             phone:''
         },
     });
-    const watchedFields = watch();
+    // const watchedFields = watch();
 
     const allValues = watch();
     return <Box component={'form'} onSubmit={handleSubmit(()=>{})} sx={{ display: 'flex', flexDirection: 'column', gap: 2, width: '100%', margin: '0 auto', padding: 6 }}>
@@ -69,7 +66,6 @@ export default function Curriculum() {
                     <StyledField
                         size="small"
                         sx={{ color: 'red', 
-                            // width: `${allValues.full_name == '' ? '17' : Math.max((allValues.full_name || '').length, 13)}ch` 
                             width: `${Math.min((allValues.full_name || '').length * 0.84, 28)}ch`,
                             minWidth: '15ch'
                         }}
@@ -136,58 +132,8 @@ export default function Curriculum() {
                             <p className="text-xs text-zinc-400">Postulaciones</p>
                         </div>
                     </Box>
-                {/* <Button
-                    sx={{
-                        width:'100%',
-                        color:'#3f3f46',
-                        fontWeight:'bold',
-                        background:'transparent',
-                        border:'.1em solid #d4d4d8'
-                    }}
-                >Enviar Mensaje</Button> */}
             </Box>
             <Box sx={{width:'80%'}}></Box>
         </Box>
-        {/* <Controller
-            name="benefits"
-            control={control}
-            render={({ field }) => (
-                <Autocomplete
-                    multiple
-                    freeSolo
-                    options={[]}
-                    value={field.value ?? []}
-                    onChange={(_, newValue) => field.onChange(newValue)}
-                    renderValue={(value: readonly string[], getTagProps) =>
-                        value.map((option: string, index: number) => (
-                            <Chip
-                                variant="outlined"
-                                label={option}
-                                {...getTagProps({ index })}
-                            />
-                        ))
-                    }
-                    renderInput={(params: any) => (
-                        <CustomTextField
-                            {...params}
-                            InputProps={{
-                                ...params.InputProps,
-                                startAdornment: (
-                                    <>
-                                        <InputAdornment position="start">
-                                            <ListAlt sx={{ color: '#ababab' }} />
-                                        </InputAdornment>
-                                        {params.InputProps.startAdornment}
-                                    </>
-                                ),
-                            }}
-                            label="Beneficios"
-                        // error={!!errors.benefits}
-                        // helperText={errors.benefits?.message}
-                        />
-                    )}
-                />
-            )}
-        /> */}
     </Box>
 }

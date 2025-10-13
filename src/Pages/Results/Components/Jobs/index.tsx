@@ -6,7 +6,7 @@ import Details from '../Details';
 import JobCard from '../../../../Components/JobCard';
 import { useAuthStore } from '../../../../stores/authStore';
 import { jwtDecode as jwt_decode } from 'jwt-decode';
-import { Box, Pagination, Stack } from '@mui/material';
+import { Pagination, Stack } from '@mui/material';
 
 const Jobs = () => {
     const [showDetails, setShowDetails] = useState<boolean>(false);
@@ -25,7 +25,7 @@ const Jobs = () => {
         return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
     }
 
-    const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    const handlePageChange = (_: React.ChangeEvent<unknown>, value: number) => {
         setFilters({
             ...filters,
             page: `${value}`
