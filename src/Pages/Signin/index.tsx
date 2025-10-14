@@ -182,9 +182,9 @@ const Signin: React.FC<SigninProps> = () => {
                     Iniciar sesión
                 </Button>
             </Box>
-            <Typography variant="caption" width={400} color='#3f3f3f' textAlign={'center'} display={'block'} mx={'auto'}>
+            {/* <Typography variant="caption" width={400} color='#3f3f3f' textAlign={'center'} display={'block'} mx={'auto'}>
                 <strong>Registrate</strong> y empieza a aplicar a˝ <strong>empleos</strong> <Link to='/signup' className='text-[#5d6cf7] font-bold underline'>Click aquí.</Link>
-            </Typography>
+            </Typography> */}
         </Stack>
 
     </Box>
