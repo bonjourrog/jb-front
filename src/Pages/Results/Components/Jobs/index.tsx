@@ -1,5 +1,5 @@
 import './Jobs.css';
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useJobs } from "../../../../hooks/useJobs";
 import { useJobStore } from '../../../../stores/jobStore';
 import Details from '../Details';
@@ -16,6 +16,7 @@ const Jobs = () => {
     const setFilters = useJobStore(state => state.setFilters);
     const { token } = useAuthStore();
     const pagination = useJobStore(s => s.pagination);
+    const continer = useRef<HTMLDivElement>(null)
 
 
     const colorGenerator = (): string => {
@@ -45,7 +46,13 @@ const Jobs = () => {
 
     useJobs(filters);
 
-    return <section className='jobs'>
+    useEffect(() => {
+        if (continer.current) {
+            continer.current.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }, [pagination])
+
+    return <section className='jobs' ref={continer}>
         <strong>Recientes</strong>
         <Details job={job} setShowDetails={setShowDetails} showDetails={showDetails} />
         <ul className={`list ${showDetails ? 'list--with-details' : 'list--without-details'}`}>
