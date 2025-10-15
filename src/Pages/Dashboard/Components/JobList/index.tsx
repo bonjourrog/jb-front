@@ -142,8 +142,8 @@ const JobList = () => {
                     <div className='flex items-center gap-2 text-sm text-gray-700'><Edit sx={{ fontSize: 18 }} /> Editar</div>
                 </MenuItem>
                 <MenuItem onClick={() => {
-                    console.log('Click delete');
-                    handleJobDelete()
+                    handleJobDelete();
+                    setMenuState({ anchorEl: null, isOpen: false, jobId: '' });
                 }}>
                     <div className='flex items-center gap-2 text-sm text-gray-700'><Delete sx={{ fontSize: 18 }} /> Eliminar</div>
                 </MenuItem>
