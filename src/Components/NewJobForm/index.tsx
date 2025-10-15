@@ -33,7 +33,7 @@ const JobListForm: React.FC<NewJobFormProps> = ({ setShowForm, jobData }) => {
             industry: industries[0],
             schedule: schedules[0],
             contract_type: contractTypes[0],
-            published: false
+            published: true
         },
     });
 
@@ -55,7 +55,7 @@ const JobListForm: React.FC<NewJobFormProps> = ({ setShowForm, jobData }) => {
             industry: jobData?.industry ?? industries[0],
             schedule: jobData?.schedule ?? schedules[0],
             contract_type: jobData?.contract_type ?? contractTypes[0],
-            published: jobData?.published ?? false,
+            published: jobData?.published ?? true,
         })
     }, [jobData, reset])
 
