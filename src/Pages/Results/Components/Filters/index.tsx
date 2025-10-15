@@ -55,7 +55,7 @@ const Filters:FC<{setShowFilters?:Dispatch<SetStateAction<boolean>>}> = ({setSho
                 {jobSchedule.map(type=><RadioPill value={type} />)}
             </RadioGroup>
         </li>
-        <button className='w-fit px-10 py-3 mx-auto my-1 font-bold rounded-md bg-blue-100 text-blue-600 border border-blue-600' onClick={()=>setShowFilters!(false)}>buscar</button>
+        <button className='filter__search-btn' onClick={()=>setShowFilters!(false)}>buscar</button>
     </ul>
 }
 export default Filters;
