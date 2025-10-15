@@ -69,7 +69,7 @@ const Header = () => {
 
             </ul>
             : <ul className='flex gap-3 items-center'>
-                Uncoment this when user are allowed to register
+                {/* Uncoment this when user are allowed to register */}
                 {/* <Link to={'/login'} ><li className='cursor-pointer hover:text-indigo-600'>Iniciar sesión</li></Link> */}
                 <Link to={'/login'} ><li className='cursor-pointer bg-indigo-500 text-white p-2 px-4 rounded-full'>Iniciar sesión</li></Link>
                 {/* <li className='cursor-pointer bg-indigo-500 text-white p-2 px-4 rounded-full'>
