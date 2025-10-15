@@ -11,7 +11,6 @@ import { NewJobFormProps } from './newJobForm.props';
 import { useJobs } from '../../hooks/useJobs';
 import { Filter } from '../../entity/filter';
 import RichTextfield from '../RichTextfield';
-import { toast } from 'react-toastify';
 
 const JobListForm: React.FC<NewJobFormProps> = ({ setShowForm, jobData }) => {
     const [_, setIndustry] = useState<Industry | ''>('');
