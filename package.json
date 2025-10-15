@@ -15,6 +15,7 @@
     "@hookform/resolvers": "^5.0.1",
     "@mui/icons-material": "^7.0.2",
     "@mui/material": "^7.0.2",
+    "@react-input/mask": "^2.0.4",
     "@tiptap/extension-link": "^3.6.6",
     "@tiptap/extension-underline": "^3.6.6",
     "@tiptap/pm": "^3.6.6",
