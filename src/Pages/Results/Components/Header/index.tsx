@@ -69,10 +69,12 @@ const Header = () => {
 
             </ul>
             : <ul className='flex gap-3 items-center'>
-                <Link to={'/login'} ><li className='cursor-pointer hover:text-indigo-600'>Iniciar sesión</li></Link>
-                <li className='cursor-pointer bg-indigo-500 text-white p-2 px-4 rounded-full'>
+                Uncoment this when user are allowed to register
+                {/* <Link to={'/login'} ><li className='cursor-pointer hover:text-indigo-600'>Iniciar sesión</li></Link> */}
+                <Link to={'/login'} ><li className='cursor-pointer bg-indigo-500 text-white p-2 px-4 rounded-full'>Iniciar sesión</li></Link>
+                {/* <li className='cursor-pointer bg-indigo-500 text-white p-2 px-4 rounded-full'>
                     <Link to={'/signup'}>Registrate</Link>
-                </li>
+                </li> */}
             </ul>
         }
         {open ? <div onClick={handleClose} className={`absolute w-screen h-screen bg-zinc-500 z-10 opacity-0 p-0 m-0`}></div> : undefined}
