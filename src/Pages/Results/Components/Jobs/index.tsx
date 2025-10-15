@@ -4,8 +4,8 @@ import { useJobs } from "../../../../hooks/useJobs";
 import { useJobStore } from '../../../../stores/jobStore';
 import Details from '../Details';
 import JobCard from '../../../../Components/JobCard';
-import { useAuthStore } from '../../../../stores/authStore';
-import { jwtDecode as jwt_decode } from 'jwt-decode';
+// import { useAuthStore } from '../../../../stores/authStore';
+// import { jwtDecode as jwt_decode } from 'jwt-decode';
 import { Pagination, Stack } from '@mui/material';
 
 const Jobs = () => {
@@ -14,7 +14,7 @@ const Jobs = () => {
     const jobs = useJobStore(state => state.jobs);
     const filters = useJobStore(state => state.filters);
     const setFilters = useJobStore(state => state.setFilters);
-    const { token } = useAuthStore();
+    // const { token } = useAuthStore();
     const pagination = useJobStore(s => s.pagination);
     const continer = useRef<HTMLDivElement>(null)
 
@@ -33,16 +33,16 @@ const Jobs = () => {
         });
     };
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        if (token) {
-            const decoed: any = jwt_decode(token);
-            setFilters({
-                ...filters,
-                user_id: decoed.userId
-            })
-        }
-    }, [token])
+    //     if (token) {
+    //         const decoed: any = jwt_decode(token);
+    //         setFilters({
+    //             ...filters,
+    //             user_id: decoed.userId
+    //         })
+    //     }
+    // }, [token])
 
     useJobs(filters);
 
