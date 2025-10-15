@@ -1,15 +1,22 @@
 import './Dashboard.css';
 import Sidebar from './Components/Sidebar';
-import { Outlet } from 'react-router';
+import { Outlet, useNavigate } from 'react-router';
 import { Close, Menu as MenuIcon } from '@mui/icons-material';
 import { Menu, MenuItem } from '@mui/material';
 import { useState } from 'react';
+import { useAuthStore } from '../../stores/authStore';
 
 const Dashboard = () => {
     const [menuState, setMenuState] = useState<{ anchorEl: null | HTMLElement, isOpen: boolean }>({
         anchorEl: null,
         isOpen: false,
     });
+    const logout = useAuthStore(s=>s.logout);
+    const navigate = useNavigate();
+    const handleLogout = ()=>{
+        logout();
+        navigate('/');
+    }
     return <main className="dashboard">
         <input type="checkbox" id="sidebar-toggle" className="peer hidden" />
         <div className='dashboard__sidebar--div'>
@@ -62,6 +69,7 @@ const Dashboard = () => {
         >
             <MenuItem onClick={() => {
                 setMenuState({ anchorEl: null, isOpen: false });
+                handleLogout();
             }} sx={{ mb: 2, background: 'transparent' }}>
                 <div className='flex items-center gap-2 text-sm bg-red-200 text-red-500 p-4 rounded-md'>Cerrar Sesión</div>
             </MenuItem>
