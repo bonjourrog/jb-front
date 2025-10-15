@@ -38,12 +38,8 @@ const JobListForm: React.FC<NewJobFormProps> = ({ setShowForm, jobData }) => {
     });
 
     const onSubmit = async (data: NewJobData) => {
-        try {
-            !jobData ? createJob(data) : updateJob({ ...jobData, ...data });
-            setShowForm(false)
-        } catch (error) {
-            toast.error('Algo salio mal, por favor verifica la información o recarga la página')
-        }
+        !jobData ? createJob(data) : updateJob({ ...jobData, ...data });
+        setShowForm(false)
     };
     useEffect(() => {
         reset({
