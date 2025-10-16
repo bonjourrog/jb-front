@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { Job } from "../entity/job";
-import { getJobs, newJob, updateJob as updateJobService, deleteJob as deleteJobService } from "../service/job";
+import { getJobs, newJob, updateJob as updateJobService, deleteJob as deleteJobService, getJob as getJobService } from "../service/job";
 import { Filter } from "../entity/filter";
 import { jwtDecode as jwt_decode } from 'jwt-decode';
 import { useAuthStore } from "../stores/authStore";
@@ -14,6 +14,7 @@ export const useJobs = (filters: Filter) => {
     const updateJobs = useJobStore(state=>state.updateJobs);
     const jobs = useJobStore(state=>state.jobs)
     const setJobs = useJobStore(state=>state.setJobs);
+    const setJob = useJobStore(state=>state.setJob);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const createJob = async (data: NewJobData): Promise<any> => {
@@ -31,6 +32,18 @@ export const useJobs = (filters: Filter) => {
             return response;
         } catch (error: any) {
             toast.error(error?.response?.data?.error || 'Error al crear el empleo');
+        }
+    }
+
+    const getJob = async(company_name: string, slug: string)=>{
+        setIsLoading(true)
+        try {
+            const response = await getJobService(company_name, slug)
+            setJob(response.data)
+        } catch (error:any) {
+            toast.error(error?.response?.data?.error || 'Error al obtener el empleo, verifique el link o recargue la página');
+        }finally{
+            setIsLoading(false)
         }
     }
 
@@ -79,5 +92,5 @@ export const useJobs = (filters: Filter) => {
         getAllJobs()
     }, [filters]);
 
-    return {createJob, updateJob, deleteJob, getAllJobs, isLoading, error}
+    return {getJob, createJob, updateJob, deleteJob, getAllJobs, isLoading, error}
 }
