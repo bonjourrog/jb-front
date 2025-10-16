@@ -1,7 +1,7 @@
 import { HiMapPin } from 'react-icons/hi2';
 import './Details.css';
 import { DetailsProps } from "./Details.props";
-import { FaArrowLeftLong } from "react-icons/fa6";
+import { FaArrowLeftLong, FaLink } from "react-icons/fa6";
 import { HiCash } from 'react-icons/hi';
 import CompanyLogo from '../CompanyLogo';
 // UNCOMMENT THIS WHEN SYSTEM ADMIT APPLY FUNCTIONALITY
@@ -10,6 +10,7 @@ import CompanyLogo from '../CompanyLogo';
 // import { useUserApplication } from '../../../../hooks/useUserApplication';
 import HTMLContent from '../../../../Components/HTMLContent/inde';
 import WhatsAppButton from '../../../../Components/WhatsappButton';
+import { toast } from 'react-toastify';
 
 const Details: React.FC<DetailsProps> = ({ showDetails, setShowDetails, job }) => {
     // UNCOMMENT THIS WHEN SYSTEM ADMIT APPLY FUNCTIONALITY
@@ -31,6 +32,16 @@ const Details: React.FC<DetailsProps> = ({ showDetails, setShowDetails, job }) =
     //         await applyJob(job._id);
     //     }
     // }
+
+    const handleClipboard = () => {
+            const textArea = document.createElement('textarea');
+            textArea.value = `${import.meta.env.VITE_BASE_URL}job/${job.company_name?.replace(" ", "-").toLowerCase()}/${job.slug}`;
+            document.body.appendChild(textArea);
+            textArea.select();  // Selecciona el texto
+            document.execCommand('copy');  // Copia al portapapeles
+            document.body.removeChild(textArea);
+            toast.success("enlace copiado")
+        }
     return <div className={`details ${showDetails ? 'details--hide' : 'details--show'}`}>
         <button onClick={() => setShowDetails(!showDetails)} className='details__return-btn'>
             <FaArrowLeftLong />
@@ -68,7 +79,15 @@ const Details: React.FC<DetailsProps> = ({ showDetails, setShowDetails, job }) =
                     }
                 </ul>
                 <HTMLContent html={job.description} />
-                <WhatsAppButton phoneNumber={`${job.company_phone}`} message={`Hola, vengo de penasco.io y quiero aplicar al puesto de ${job.title}`} fullWidth={false}/>
+                <div className='flex items-center gap-4'>
+                    <WhatsAppButton phoneNumber={`${job.company_phone}`} message={`Hola, vengo de penasco.io y quiero aplicar al puesto de ${job.title}`} fullWidth={false}/>
+                    <button onClick={handleClipboard} className='flex items-center gap-2 bg-indigo-100 h-10 border border-indigo-200 rounded-md px-2 overflow-hidden'>
+                        <div className='flex items-center justify-center w-7 h-7 bg-indigo-400 text-white rounded-md'>
+                            <FaLink className=''/>
+                        </div>
+                        <p className='text-indigo-400 font-light'>Compartir</p>
+                    </button>
+                </div>
             </ul> : <div>
                 Seleccione un trabajo
             </div>}

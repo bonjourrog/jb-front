@@ -38,14 +38,13 @@ const JobDetail = () => {
     };
 
     const handleClipboard = () => {
-
-        navigator.clipboard.writeText(`${import.meta.env.VITE_BASE_URL}job/${job.company_name?.replace(" ", "-").toLowerCase()}/${job.slug}`)
-            .then(() => {
-                toast.success("enlace copiado")
-            })
-            .catch(() => {
-                toast.error("error al copiar el enlace, intente de nuevo o recarge la página")
-            });
+        const textArea = document.createElement('textarea');
+        textArea.value = `${import.meta.env.VITE_BASE_URL}job/${job.company_name?.replace(" ", "-").toLowerCase()}/${job.slug}`;
+        document.body.appendChild(textArea);
+        textArea.select();  // Selecciona el texto
+        document.execCommand('copy');  // Copia al portapapeles
+        document.body.removeChild(textArea);
+        toast.success("enlace copiado")
     }
 
     useEffect(() => {
