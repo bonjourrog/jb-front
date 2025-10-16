@@ -12,6 +12,7 @@ import Applied from "../Applied";
 import UserLayout from "../../layout/dashboard/user";
 import Curriculum from "../Curriculum";
 import JoinForm from "../JoinForm";
+import JobDetail from "../JobDetail";
 
 const AppRoutes = () => {
     let routes = useRoutes([
@@ -20,6 +21,7 @@ const AppRoutes = () => {
         { path: '/signup', element: <Signup /> },
         { path: '/login', element: <Signin /> },
         {path: '/join', element: <JoinForm />},
+        {path:'/job/:company_name/:slug', element:<JobDetail/>},
         { path: '/dashboard', 
             element: <ProtectedRoute allowedRoles={['company']}><Dashboard /></ProtectedRoute>,
             children:[
