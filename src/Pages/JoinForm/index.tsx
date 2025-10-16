@@ -14,23 +14,28 @@ import {
 } from '@mui/material';
 import { BiCheckCircle } from 'react-icons/bi';
 import { useMask } from '@react-input/mask';
+import { useProspect } from '../../hooks/useProspect';
 
 const JoinForm = () => {
+    const { registerProspective } = useProspect();
     const [submitted, setSubmitted] = useState(false);
     const { control, handleSubmit, reset, formState: { errors } } = useForm({
         defaultValues: {
-            company: '',
-            contact: '',
+            company_name: '',
+            contact_name: '',
             email: '',
             phone: '',
-            size: '',
+            company_size: '',
             vacancies: ''
         }
     });
 
-    const onSubmit = (data:any) => {
+    const onSubmit = async (data: any) => {
         data.phone = data.phone.replace(/\s+/g, '');
-        console.log('Datos del formulario:', data);
+        const response = await registerProspective(data)
+        if(!response){
+            return
+        }
         setSubmitted(true);
         setTimeout(() => {
             setSubmitted(false);
@@ -250,7 +255,7 @@ const JoinForm = () => {
                             {!submitted ? (
                                 <Box component="form" onSubmit={handleSubmit(onSubmit)}>
                                     <Controller
-                                        name="company"
+                                        name="company_name"
                                         control={control}
                                         rules={{ required: 'Este campo es requerido' }}
                                         render={({ field }) => (
@@ -258,8 +263,8 @@ const JoinForm = () => {
                                                 {...field}
                                                 fullWidth
                                                 label="Nombre de la Empresa *"
-                                                error={!!errors.company}
-                                                helperText={errors.company?.message}
+                                                error={!!errors.company_name}
+                                                helperText={errors.company_name?.message}
                                                 sx={{ mb: 3 }}
                                                 InputProps={{
                                                     sx: {
@@ -284,7 +289,7 @@ const JoinForm = () => {
                                     />
 
                                     <Controller
-                                        name="contact"
+                                        name="contact_name"
                                         control={control}
                                         rules={{ required: 'Este campo es requerido' }}
                                         render={({ field }) => (
@@ -292,8 +297,8 @@ const JoinForm = () => {
                                                 {...field}
                                                 fullWidth
                                                 label="Nombre de Contacto *"
-                                                error={!!errors.contact}
-                                                helperText={errors.contact?.message}
+                                                error={!!errors.contact_name}
+                                                helperText={errors.contact_name?.message}
                                                 sx={{ mb: 3 }}
                                                 InputProps={{
                                                     sx: {
@@ -400,7 +405,7 @@ const JoinForm = () => {
                                     />
 
                                     <Controller
-                                        name="size"
+                                        name="company_size"
                                         control={control}
                                         rules={{ required: 'Este campo es requerido' }}
                                         render={({ field }) => (
@@ -409,8 +414,8 @@ const JoinForm = () => {
                                                 fullWidth
                                                 select
                                                 label="Tamaño de la Empresa *"
-                                                error={!!errors.size}
-                                                helperText={errors.size?.message}
+                                                error={!!errors.company_size}
+                                                helperText={errors.company_size?.message}
                                                 sx={{ mb: 3 }}
                                                 InputProps={{
                                                     sx: {
