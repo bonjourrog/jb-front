@@ -6,6 +6,10 @@ export const getJobs = async(filters:Filter)=>{
     return (await api.get('job', {params:{...filters}})).data as JobResponse;
 }
 
+export const getJob = async(company_name:string, slug: string)=>{
+    return (await api.get(`job/${company_name}/${slug}`)).data;
+}
+
 export const newJob = async(job:Job, token:string)=>{
     return (await api.post('job', job, {headers:{'Authorization':token}})).data
 }
