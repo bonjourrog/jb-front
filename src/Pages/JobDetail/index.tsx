@@ -43,7 +43,7 @@ const JobDetail = () => {
             .then(() => {
                 toast.success("enlace copiado")
             })
-            .catch((err) => {
+            .catch(() => {
                 toast.error("error al copiar el enlace, intente de nuevo o recarge la página")
             });
     }
