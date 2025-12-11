@@ -12,7 +12,7 @@ import { useJobs } from '../../hooks/useJobs';
 import { Filter } from '../../entity/filter';
 import RichTextfield from '../RichTextfield';
 
-const JobListForm: React.FC<NewJobFormProps> = ({ setShowForm, jobData }) => {
+const NewJobForm: React.FC<NewJobFormProps> = ({ setShowForm, jobData }) => {
     const [_, setIndustry] = useState<Industry | ''>('');
     const { createJob, updateJob } = useJobs({} as Filter);
     const {
@@ -164,7 +164,6 @@ const JobListForm: React.FC<NewJobFormProps> = ({ setShowForm, jobData }) => {
                                         label={option}
                                         {...tagProps}
                                     />
-
                                 })
                             }
                             renderInput={(params: any) => (
@@ -258,6 +257,7 @@ const JobListForm: React.FC<NewJobFormProps> = ({ setShowForm, jobData }) => {
                                 }}
                                 {...field}
                                 fullWidth
+                                label='Contract Type'
                                 displayEmpty
                                 error={!!errors.contract_type}
                             >
@@ -286,4 +286,4 @@ const JobListForm: React.FC<NewJobFormProps> = ({ setShowForm, jobData }) => {
         </Stack>
     </Box>
 }
-export default JobListForm;
+export default NewJobForm;
