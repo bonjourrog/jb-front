@@ -67,7 +67,7 @@ const UserLayout: React.FC<UserLayoutProps> = () => {
             </ul>
             <button onClick={handleLogout} className="px-2 py-1 rounded-lg bg-red-100 text-red-400">Cerrar sesion</button>
         </nav>
-        <section className="flex flex-col flex-1 min-w-0">
+        <section className="flex flex-col flex-1 min-w-0 max-h-screen overflow-hidden">
             <header className="w-full p-10 bg-white">
                 Bienvenido
             </header>
